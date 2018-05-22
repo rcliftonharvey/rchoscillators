@@ -55,7 +55,8 @@ Now that your oscillator is instantiated, you need to inform it about essential 
 ```c++
 oscSine.setSampleRate(sampleRateInHz);
 oscSine.setFrequency(frequencyInHz);
-oscSine.setAmplitude(volumeInFloatGain);   // if you use float gain factors (type float) or
+oscSine.setAmplitude(volumeInFloatGain);   // if you use float gain factors (type float)
+/* --- or --- */
 oscSine.setVolume(volumeInDoubleDecibels); // if you use Decibel values (type double)
 ```
 
@@ -72,8 +73,9 @@ Finally, run a loop that fetches one tick from the oscillator for every sample i
 ```c++
 for (unsigned int sample=0; sample<NumSamples; ++sample)
 {
-  channel[sample] =  oscSine.tick();   // This will entirely replace the incoming signal with the sine wave, alternatively...
-  channel[sample] += oscSine.tick();   // This will add the sine wave on top of the incoming signal.
+  channel[sample] =  oscSine.tick();   // This will replace the incoming signal with the sine wave
+  /* --- or --- */
+  channel[sample] += oscSine.tick();   // This will add the sine wave on top of the incoming signal
 }
 ```
 
