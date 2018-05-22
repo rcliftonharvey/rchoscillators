@@ -50,7 +50,7 @@ RCH::Oscillators::Templates::Sine oscSine;
 
 This will create an oscillator that can produce a continuous sine wave for a single channel of audio, and you will have to poll it on a per-sample basis.
 
-Now that your oscillator is instantiated, you need to inform it about essential values, like the sample rate to operate at and the center frequency to generate the sine wave at, otherwise the oscillator can't process correctly. Set the filter up somewhere in your processing block, in JUCE that would be in the file **PluginProcessor.cpp**, maybe at ***prepareToPlay*** or (more likely) in the ***processBlock*** method:
+Now that your oscillator is instantiated, you need to inform it about essential values, like the sample rate to operate at and the center frequency to generate the sine wave at, otherwise the oscillator can't process correctly. Set the oscillator up somewhere in your per-block processing call, in JUCE that would be in the file **PluginProcessor.cpp**, maybe at ***prepareToPlay*** or (more likely) in the ***processBlock*** method:
 ```c++
 oscSine.setSampleRate(sampleRateInHz);
 oscSine.setFrequency(frequencyInHz);
