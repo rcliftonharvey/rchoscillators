@@ -47,32 +47,42 @@ public:
         phase += fractionFrequency;
         
         // Constrain/wrap phase value to sensible boundaries [0,1]
-        if (phase >= 1.0)
-        {
-            phase -= 1.0;
-        }
-        else if (phase < 0.0)
-        {
-            phase += 1.0;
-        }
+        //
+        // if (phase >= 1.0)
+        // {
+        //     phase -= 1.0;
+        // }
+        // else if (phase < 0.0)
+        // {
+        //     phase += 1.0;
+        // }
+        //
+        // IF-branches are slower than simple maths in time critical code, this does the same but faster
+        phase += ((phase >= 1.0) * -1.0) + ((phase < 0.0) * 1.0);
         
         // Calculate pulse value for current phase step
-        // Using amplitude instead of +/- 1.0 * amplitude to save a multiplication step
-        // If phase between [0.0,width] then output positive
-        if (phase < width)
-        {
-            state = amplitude;
-        }
-        // If phase between [0.5,0.5+width] then output negative
-        else if ((phase >= 0.5) and (phase < 0.5 + width))
-        {
-            state = -amplitude;
-        }
-        // If phase outside of value range that should generate a pulse signal
-        else
-        {
-            state = 0.0;
-        }
+        // For simplicity, this will stay an IF conditional branch
+        //
+        // (Use just amplitude instead of (+/- 1.0 * amplitude) to save a
+        //  multiplication step when utilizing slow conditional branching.)
+        //
+        // If phase between [0.0,width] then output state is positive
+        // if (phase < width)
+        // {
+        //     state = amplitude;
+        // }
+        // If phase between [0.5,0.5+width] then output state is negative
+        // else if ((phase >= 0.5) and (phase < 0.5 + width))
+        // {
+        //     state = -amplitude;
+        // }
+        // If phase outside of value range that should generate a pulse
+        // else
+        // {
+        //     state = 0.0;
+        // }
+        // IF-branches are slower than simple maths in time critical code, this does the same but faster
+        state = ((phase < width) * amplitude) + ((phase >= 0.5) * (phase < 0.5 + width) * -amplitude);
         
         // Return calculated pulse wave value
         return state;

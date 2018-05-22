@@ -51,18 +51,30 @@ public:
         phase += fractionFrequency;
         
         // Constrain/wrap phase value to sensible boundaries [0,1]
-        if (phase >= 1.0)
-        {
-            phase -= 1.0;
-        }
-        else if (phase < 0.0)
-        {
-            phase += 1.0;
-        }
+        //
+        // if (phase >= 1.0)
+        // {
+        //     phase -= 1.0;
+        // }
+        // else if (phase < 0.0)
+        // {
+        //     phase += 1.0;
+        // }
+        //
+        // IF-branches are slower than simple maths in time critical code, this does the same but faster
+        phase += ((phase >= 1.0) * -1.0) + ((phase < 0.0) * 1.0);
         
-        // Evaluate wavetable index: if phase <= 0.5 --> 0, else --> 1
-        // It would also be possible to do IF-branching here, but I wanted to try this.
-        const unsigned int index = static_cast<unsigned int>(std::ceil(phase - 0.5));
+        // Evaluate wavetable index: if phase < 0.5 --> 0, else --> 1
+        //
+        // It would also be possible to do IF-branching here, but branching in time-critical
+        // per-sample methods is to be discouraged, so I wanted to do it differently here.
+        //
+        // This is possible but clunky, since uses Maths instead of a simple bool 0/1 multiplier.
+        // const unsigned int index = static_cast<unsigned int>(std::ceil(phase - 0.5));
+        //
+        // This is a lot simpler/faster to compute than conditional branching or ceilings.
+        // A TRUE condition results in index 1, a FALSE condition results in index 0.
+        const unsigned int index = static_cast<unsigned int>(phase < 0.5);
         
         // Fetch square wave value from wavetable and scale to desired volume
         state = wavetable[index] * amplitude;

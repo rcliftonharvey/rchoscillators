@@ -49,14 +49,18 @@ public:
         phase += direction * fractionFrequency;
         
         // Constrain/wrap phase value to sensible boundaries [0,1]
-        if (phase > 1.0)
-        {
-            phase -= 1.0;
-        }
-        else if (phase < 0.0)
-        {
-            phase += 1.0;
-        }
+        //
+        // if (phase > 1.0)
+        // {
+        //     phase -= 1.0;
+        // }
+        // else if (phase < 0.0)
+        // {
+        //     phase += 1.0;
+        // }
+        //
+        // IF-branches are slower than simple maths in time critical code, this does the same but faster
+        phase += ((phase > 1.0) * -1.0) + ((phase < 0.0) * 1.0);
         
         // Calculate saw value for current phase step and scale to desired volume
         state = ((phase * 2.0) - 1.0) * amplitude;

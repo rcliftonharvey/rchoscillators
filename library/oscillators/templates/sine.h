@@ -45,16 +45,21 @@ public:
         phase += M_2PI * fractionFrequency;
         
         // Constrain/wrap phase value to sensible boundaries [0,2PI]
-        if (phase >= M_2PI)
-        {
-            phase -= M_2PI;
-        }
-        else if (phase < 0.0)
-        {
-            phase += M_2PI;
-        }
+        //
+        // if (phase >= M_2PI)
+        // {
+        //     phase -= M_2PI;
+        // }
+        // else if (phase < 0.0)
+        // {
+        //     phase += M_2PI;
+        // }
+        //
+        // IF-branches are slower than simple maths in time critical code, this does the same but faster
+        phase += ((phase >= M_2PI) * -M_2PI) + ((phase < 0.0) * M_2PI);
         
-        // Calculate sine value for current phase step and scale to desired volume
+        // Calculate sine value for current phase step and scale to desired volume. I tried using fast
+        // sine approximations and lookup tables instead, but they added audible harmonic imperfections.
         state = std::sin(phase) * amplitude;
         
         // Return calculated sine value

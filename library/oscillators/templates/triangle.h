@@ -45,24 +45,32 @@ public:
         phase += fractionFrequency;
         
         // Constrain/wrap phase value to sensible boundaries [0,1]
-        if (phase > 1.0)
-        {
-            phase -= 1.0;
-        }
-        else if (phase < 0.0)
-        {
-            phase += 1.0;
-        }
+        //
+        // if (phase > 1.0)
+        // {
+        //     phase -= 1.0;
+        // }
+        // else if (phase < 0.0)
+        // {
+        //     phase += 1.0;
+        // }
+        //
+        // IF-branches are slower than simple maths in time critical code, this does the same but faster
+        phase += ((phase > 1.0) * -1.0) + ((phase < 0.0) * 1.0);
         
         // Calculate triangle value for current phase step
-        if (phase <= 0.5)
-        {
-            state = phase * 4.0 - 1.0;
-        }
-        else
-        {
-            state = (1.0 - phase) * 4.0 - 1.0;
-        }
+        //
+        // if (phase <= 0.5)
+        // {
+        //     state = phase * 4.0 - 1.0;
+        // }
+        // else
+        // {
+        //     state = (1.0 - phase) * 4.0 - 1.0;
+        // }
+        //
+        // IF-branches are slower than simple maths in time critical code, this does the same but faster
+        state = ((phase < 0.5) * (4.0 * phase - 1.0)) + ((phase >= 0.5) * (1.0 - 4.0 * (phase - 0.5)));
         
         // Scale to desired output volume
         state *= amplitude;

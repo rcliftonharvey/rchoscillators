@@ -16,7 +16,7 @@
 
 ## Introduction 
 
-This is a pure C++ library that implements all basic oscillator types (sine, triangle, saw rising, saw falling, square and pulse) in fast and easy to use classes, both as single-channel per-sample "templates", as well as multi-channel capable processors (with mono signal) than can handle entire sample buffers in one call.
+This is a pure C++ library that implements all basic oscillator types (sine, triangle, saw rising, saw falling, square and pulse) in fast and easy to use classes. The oscillators come both as single-channel per-sample "templates", as well as multi-channel capable processors than can fill entire sample buffers with a sound wave in just one short line of code.
 
 This library is compatible with frameworks like [JUCE](https://juce.com/) or [WDL](https://www.cockos.com/wdl/), but it was written with no dependencies, which means you can use it by itself and in any application, without being bound to JUCE, WDL or any such 3rd party frameworks at all.
 
@@ -129,8 +129,11 @@ The JUCE framework itself (required for the demo project) is shipped and license
 
 ## Credits
 
-The oscillators in this library were inspired by Alan Wolfe's example code at Demofox.org, but were significantly extended, improved and simplified by me. Still, check Alan's blog out, it's full of incredibly useful DSP resources, both for graphics and audio processing.<br>
+The oscillators in this library were inspired by **Alan Wolfe**'s example code at Demofox.org. By *inspired*, I don't mean that I merely copied his code snippets 1:1. I much rather used them to understand how they work, and then heavily optimized, extended and also in places simplified his concepts. Without reading the comments in my source code, you probably wouldn't notice much of a relation.<br>
+Still, if you're into any sort of audio or graphics DSP, definitely check out Alan's blog page, it's full of immensely useful resources for us digital signal bending geeks.<br>
 [http://demofox.org/]
+
+I also wish to extend a big *thank you* to **William Rodewald** for enlightening me over a cup of coffee with what I would call *un-branched conditional evaluations*. Knowing that branched IF blocks are a performance downer in per-sample tick code is only half the rent, but actually finding a worthwhile and more performant alternative is the part that matters. 
 
 -------------------------------------------------------------------------------------------------------
 
