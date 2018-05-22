@@ -29,12 +29,14 @@ The original repository for RCH::Oscillators is right here:<br>
 
 ## How to use
 
-Add all the files from the [library](https://github.com/rcliftonharvey/rchoscillators/tree/master/library) folder into a group in your JUCE project. The easiest way to do this is via the "add existing files" option in the files pane of the Projucer app. Then add this line to the beginning of your **PluginProcessor.h**:
+Include the [library](https://github.com/rcliftonharvey/rchoscillators/tree/master/library) folder in your project, and include the main header file into your own main project header(s).
+
+If you use JUCE, add all the files from the library folder into a group in your JUCE project. The easiest way to do this is via the "add existing files" option in the files pane of the Projucer app.
+
+Depending on your compiler and workspace settings, you will probably have to adjust the include path for this file. But once the include path is sorted out, this is the only include line you should need:
 ```c++
 #include "rchosc.h"
 ```
-
-Depending on your compiler and workspace settings, you will probably have to adjust the include path for this file. But once the include path is sorted out, you're good to go.
 
 To avoid possible collisions with other libraries you may be using in your projects, all the classes in this library reside in the **RCH::** namespace by default. (Unless you changed it in the rchosc.h file.)
 
