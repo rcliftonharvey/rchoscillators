@@ -138,8 +138,7 @@ JUCE is only required to compile the demo project, nothing more.
 ## Credits
 
 The oscillators in this library were inspired by **Alan Wolfe**'s example code at Demofox.org. By *inspired*, I don't mean that I merely copied his code snippets 1:1. I much rather used them to understand how they work, and then heavily optimized, extended and also in places simplified his concepts. Without reading the comments in my source code, you probably wouldn't notice much of a relation.<br>
-Still, if you're into any sort of audio or graphics DSP, definitely check out Alan's blog page, it's full of immensely useful resources for us digital signal bending geeks.<br>
-[http://demofox.org/]
+Still, if you're into any sort of audio or graphics DSP, definitely check out Alan's blog page, it's full of immensely useful resources for us digital signal bending geeks. [http://demofox.org/]
 
 I also wish to extend a big *thank you* to **William Rodewald** for enlightening me over a cup of coffee with what I would call *un-branched conditional evaluations*. Knowing that branched IF blocks are a performance downer in per-sample tick code is only half the rent, but actually finding a worthwhile and more performant alternative is the part that matters. 
 
