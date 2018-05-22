@@ -40,7 +40,7 @@ Depending on your compiler and workspace settings, you will probably have to adj
 
 To avoid possible collisions with other libraries you may be using in your projects, all the classes in this library reside in the **RCH::** namespace by default. (Unless you changed it in the rchosc.h file.)
 
-**IMPORTANT** *Since I remember struggling with this myself in the early years, I thought it would be worth adding the following information:<br>
+**IMPORTANT** *Since I remember struggling with this myself in the early years...<br>
 These oscillators are **stateful**. This means one oscillator instance stays alive all the time, and no matter how many sample blocks you need to fill, you always do it with the same oscillator instance. If you want to have a continuous oscillator wave without any distortion or phase jumps, do not instantiate these in your per-block processing methods, but instantiate them as lasting variables in your header files.* :)
 
 To get started, go ahead and instantiate a simple mono sine oscillator class. On JUCE, you would do this in the **PluginProcessor.h** file:
