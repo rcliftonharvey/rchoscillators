@@ -82,7 +82,7 @@ Now, I'm a lazy guy, so I don't always want to cycle through all the channels an
 
 In the current state, these wrapper classes will generate a **single mono oscillator**, and insert or add that mono signal onto **all** the buffer's channels equally. Theoretically, there is no limitation to the number of channels that could be processed, a buffer block could have a single channel, or over 200 channels, the oscillators don't care.
 
-To instantiate an example triangle wave oscillator that offers this simple processing, just instantiate it in your header file like this:
+To instantiate an example triangle wave oscillator that offers this simple processing method, just instantiate it in your header file like this:
 ```c++
 RCH::Oscillators::Triangle oscTriangle;
 ```
@@ -96,7 +96,7 @@ oscTriangle.setup(sampleRateInHz,frequencyInHz,volumeInDoubleDecibels); // if yo
 ...and send a buffer of **float** or **double** samples into it:
 ```c++
 oscTriangle.fill(buffer,numChannels,numSamples);  // if you want to completely overwrite the buffer
-oscTriangle.add (buffer,numChannels,numSamples);  // if you want to add the sine wave to the buffer
+oscTriangle.add (buffer,numChannels,numSamples);  // if you want to add the triangle to the buffer
 ```
 
 The **fill** or **add** methods expect an array of channels, where each channel is an array of samples. In native C++ lingo, this means the buffer needs to be of type **float**** or **double****, the most common types of sample & channel arrays.
