@@ -18,7 +18,7 @@
 
 This is a pure C++ library that implements all basic oscillator types (sine, triangle, saw rising, saw falling, square and pulse) in fast and easy to use classes. The oscillators come both as single-channel per-sample "templates", as well as multi-channel capable processors that can fill entire sample buffers with a sound wave in just one short line of code.
 
-This library is compatible with frameworks like [JUCE](https://juce.com/) or [WDL](https://www.cockos.com/wdl/), but it was written with no dependencies, which means you can use it by itself and in any application, without being bound to JUCE, WDL or any such 3rd party frameworks at all.
+This library is compatible with frameworks like [JUCE](https://juce.com/) or [WDL](https://www.cockos.com/wdl/), but it was written with no dependencies, which means you can use it by itself and in any application, without being bound to any such 3rd party frameworks at all.
 
 I have done my best to comment the sources as much as I could (or made sense to me), so by reading through the headers you should get a good enough idea of what things can do or what you need to do with them.
 
