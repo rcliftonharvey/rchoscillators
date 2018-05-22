@@ -108,7 +108,7 @@ oscTriangle.fill(buffer.getArrayOfWritePointers(),numChannels,numSamples); // JU
 
 And that's just about all there's to it... :)
 
-By the way: *don't worry about constantly pushing values into the setup() methods, e.g. in **processBlock**. The oscillators are designed to only ever bother updating their settings internally when the incoming values actually change. If you send identical sample rate, center frequency and volume values into a setup() method 200 times, the oscillators won't care. If one of the values changes on the 201st time, then the oscillators will update.*
+By the way: *don't worry about constantly pushing values into the setup() methods, e.g. in **processBlock**. The oscillators are designed to only ever bother with updating their settings internally when the incoming values actually change. If you send identical sample rate, center frequency and volume values into a setup() method 200 times, the oscillators won't care. If one of the values changes on the 201st time, then the oscillators will update.*
 
 -------------------------------------------------------------------------------------------------------
 
