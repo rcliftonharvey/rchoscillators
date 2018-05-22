@@ -1,0 +1,332 @@
+/*
+  ==============================================================================
+
+    This file was auto-generated!
+
+    It contains the basic framework code for a JUCE plugin processor.
+
+  ==============================================================================
+*/
+
+#include "PluginProcessor.h"
+#include "PluginEditor.h"
+
+//==============================================================================
+RchoscillatorsAudioProcessor::RchoscillatorsAudioProcessor()
+#ifndef JucePlugin_PreferredChannelConfigurations
+     : AudioProcessor (BusesProperties()
+                     #if ! JucePlugin_IsMidiEffect
+                      #if ! JucePlugin_IsSynth
+                       .withInput  ("Input",  AudioChannelSet::stereo(), true)
+                      #endif
+                       .withOutput ("Output", AudioChannelSet::stereo(), true)
+                     #endif
+                       )
+#endif
+{
+    const double startupTrim = 0.0;
+    const double startupFreq = 1000.0;
+    const double startupVolume = -64.0;
+    
+    frequencies.setSkewForCentre(startupFreq);
+    const float paramFreq = frequencies.convertTo0to1(startupFreq);
+    
+    volumes.setSkewForCentre(startupVolume);
+    const float paramGain = volumes.convertTo0to1(startupVolume);
+    
+    trims.setSkewForCentre(startupTrim);
+    const float paramTrim = trims.convertTo0to1(startupTrim);
+    
+    addParameter(bypassed            = new AudioParameterBool ("bypassed",              "Bypass",               false));
+    
+    addParameter(volumeInput         = new AudioParameterFloat("volumeInput",           "Input: Trim",          0.0f,  1.0f,  paramTrim));
+    
+    addParameter(sine                = new AudioParameterBool ("sine",                  "Sine: In",             true));
+    addParameter(volumeSine          = new AudioParameterFloat("volumeSine",            "Sine: Volume",         0.0f,  1.0f,  paramGain));
+    addParameter(frequencySine       = new AudioParameterFloat("frequencySine",         "Sine: Hz",             0.0f,  1.0f,  paramFreq));
+    
+    addParameter(triangle            = new AudioParameterBool ("triangle",              "Triangle: In",         false));
+    addParameter(volumeTriangle      = new AudioParameterFloat("volumeTriangle",        "Triangle: Volume",     0.0f,  1.0f,  paramGain));
+    addParameter(frequencyTriangle   = new AudioParameterFloat("frequencyTriangle",     "Triangle: Hz",         0.0f,  1.0f,  paramFreq));
+    
+    addParameter(saw                 = new AudioParameterBool ("saw",                   "Saw (rise): In",       false));
+    addParameter(volumeSaw           = new AudioParameterFloat("volumeSaw",             "Saw (rise): Volume",   0.0f,  1.0f,  paramGain));
+    addParameter(frequencySaw        = new AudioParameterFloat("frequencySaw",          "Saw (rise): Hz",       0.0f,  1.0f,  paramFreq));
+    
+    addParameter(sawReverse          = new AudioParameterBool ("sawReverse",            "Saw (fall): In",       false));
+    addParameter(volumeSawReverse    = new AudioParameterFloat("volumeSawReverse",      "Saw (fall): Volume",   0.0f,  1.0f,  paramGain));
+    addParameter(frequencySawReverse = new AudioParameterFloat("frequencySawReverse",   "Saw (fall): Hz",       0.0f,  1.0f,  paramFreq));
+    
+    addParameter(square              = new AudioParameterBool ("square",                "Square: In",           false));
+    addParameter(volumeSquare        = new AudioParameterFloat("volumeSquare",          "Square: Volume",       0.0f,  1.0f,  paramGain));
+    addParameter(frequencySquare     = new AudioParameterFloat("frequencySquare",       "Square: Hz",           0.0f,  1.0f,  paramFreq));
+    
+    addParameter(pulse               = new AudioParameterBool ("pulse",                 "Pulse: In",            false));
+    addParameter(volumePulse         = new AudioParameterFloat("volumePulse",           "Pulse: Volume",        0.0f,  1.0f,  paramGain));
+    addParameter(frequencyPulse      = new AudioParameterFloat("frequencyPulse",        "Pulse: Hz",            0.0f,  1.0f,  paramFreq));
+    addParameter(widthPulse          = new AudioParameterFloat("widthPulse",            "Pulse: Width",         0.0f,  1.0f,  0.5f));
+    
+    addParameter(volumeOutput        = new AudioParameterFloat("volumeOutput",          "Output: Trim",         0.0f,  1.0f,  paramTrim));
+}
+
+// THIS IS FOR DOUBLE PRECISION BUFFERS (double samples)
+void RchoscillatorsAudioProcessor::processBlock (AudioBuffer<double>& buffer, MidiBuffer& midiMessages)
+{
+    ScopedNoDenormals noDenormals;
+    auto totalNumInputChannels  = getTotalNumInputChannels();
+    auto totalNumOutputChannels = getTotalNumOutputChannels();
+    
+    for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i) {buffer.clear (i, 0, buffer.getNumSamples());}
+    
+    // Don't need to process anything if bypassed
+    if (*bypassed == true) {return;}
+    
+    // Convenience variables
+    const unsigned int numChannels = buffer.getNumChannels();
+    const unsigned int numSamples = buffer.getNumSamples();
+    
+    // Input trim adjustment
+    if (*volumeInput != 0.5f)
+    {
+        buffer.applyGain(RCH::Helpers::Decibels::ToGain(trims.convertFrom0to1(*volumeInput)));
+    }
+    
+// ----------- OSCILLATOR SECTION STARTS BELOW ------------------------------------------------------------------
+    
+    // SINE OSCILLATOR
+    if (*sine == true)
+    {
+        oscSine.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySine),*volumeSine);
+        oscSine.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+    }
+    
+    // TRIANGLE OSCILLATOR
+    if (*triangle == true)
+    {
+        oscTriangle.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencyTriangle),*volumeTriangle);
+        oscTriangle.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+    }
+    
+    // SAW OSCILLATOR (rising)
+    if (*saw == true)
+    {
+        oscSawRise.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySaw),*volumeSaw);
+        oscSawRise.setDirection(1.0); // This makes the saw ramp up
+        oscSawRise.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+    }
+    
+    // SAW OSCILLATOR (falling)
+    if (*sawReverse == true)
+    {
+        oscSawFall.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySawReverse),*volumeSawReverse);
+        oscSawFall.setDirection(-1.0); // This makes the saw ramp down
+        oscSawFall.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+    }
+    
+    // SQUARE OSCILLATOR (full pulse width)
+    if (*square == true)
+    {
+        oscSquare.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySquare),*volumeSquare);
+        oscSquare.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+    }
+    
+    // PULSE OSCILLATOR (variable pulse width)
+    if (*pulse == true)
+    {
+        oscPulse.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencyPulse),*volumePulse);
+        oscPulse.setWidth(*widthPulse);
+        oscPulse.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+    }
+    
+// ----------- OSCILLATOR SECTION ENDS ABOVE --------------------------------------------------------------------
+    
+    // Output trim adjustment
+    if (*volumeOutput != 0.5f)
+    {
+        buffer.applyGain(RCH::Helpers::Decibels::ToGain(trims.convertFrom0to1(*volumeOutput)));
+    }
+}
+
+// THIS IS FOR SINGLE PRECISION BUFFERS (float samples)
+void RchoscillatorsAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
+{
+    ScopedNoDenormals noDenormals;
+    auto totalNumInputChannels  = getTotalNumInputChannels();
+    auto totalNumOutputChannels = getTotalNumOutputChannels();
+    
+    for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i) {buffer.clear (i, 0, buffer.getNumSamples());}
+    
+    // Don't need to process anything if bypassed
+    if (*bypassed == true) {return;}
+    
+    // Convenience variables
+    const unsigned int numChannels = buffer.getNumChannels();
+    const unsigned int numSamples = buffer.getNumSamples();
+    
+    // Input trim adjustment
+    if (*volumeInput != 0.5f)
+    {
+        buffer.applyGain(RCH::Helpers::Decibels::ToGain(trims.convertFrom0to1(*volumeInput)));
+    }
+    
+    // ----------- OSCILLATOR SECTION STARTS BELOW ------------------------------------------------------------------
+    
+    // SINE OSCILLATOR
+    if (*sine == true)
+    {
+        oscSine.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySine),*volumeSine);
+        oscSine.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+    }
+    
+    // TRIANGLE OSCILLATOR
+    if (*triangle == true)
+    {
+        oscTriangle.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencyTriangle),*volumeTriangle);
+        oscTriangle.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+    }
+    
+    // SAW OSCILLATOR (rising)
+    if (*saw == true)
+    {
+        oscSawRise.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySaw),*volumeSaw);
+        oscSawRise.setDirection(1.0); // This makes the saw ramp up
+        oscSawRise.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+    }
+    
+    // SAW OSCILLATOR (falling)
+    if (*sawReverse == true)
+    {
+        oscSawFall.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySawReverse),*volumeSawReverse);
+        oscSawFall.setDirection(-1.0); // This makes the saw ramp down
+        oscSawFall.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+    }
+    
+    // SQUARE OSCILLATOR (full pulse width)
+    if (*square == true)
+    {
+        oscSquare.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySquare),*volumeSquare);
+        oscSquare.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+    }
+    
+    // PULSE OSCILLATOR (variable pulse width)
+    if (*pulse == true)
+    {
+        oscPulse.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencyPulse),*volumePulse);
+        oscPulse.setWidth(*widthPulse);
+        oscPulse.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+    }
+    
+    // ----------- OSCILLATOR SECTION ENDS ABOVE --------------------------------------------------------------------
+    
+    // Output trim adjustment
+    if (*volumeOutput != 0.5f)
+    {
+        buffer.applyGain(RCH::Helpers::Decibels::ToGain(trims.convertFrom0to1(*volumeOutput)));
+    }
+}
+
+//==============================================================================
+void RchoscillatorsAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
+{
+    // Use this method as the place to do any pre-playback
+    // initialisation that you need..
+}
+
+//==============================================================================
+bool RchoscillatorsAudioProcessor::acceptsMidi() const
+{
+   #if JucePlugin_WantsMidiInput
+    return true;
+   #else
+    return false;
+   #endif
+}
+
+bool RchoscillatorsAudioProcessor::producesMidi() const
+{
+   #if JucePlugin_ProducesMidiOutput
+    return true;
+   #else
+    return false;
+   #endif
+}
+
+bool RchoscillatorsAudioProcessor::isMidiEffect() const
+{
+   #if JucePlugin_IsMidiEffect
+    return true;
+   #else
+    return false;
+   #endif
+}
+
+#ifndef JucePlugin_PreferredChannelConfigurations
+bool RchoscillatorsAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
+{
+  #if JucePlugin_IsMidiEffect
+    ignoreUnused (layouts);
+    return true;
+  #else
+    // This is the place where you check if the layout is supported.
+    // In this template code we only support mono or stereo.
+    if (layouts.getMainOutputChannelSet() != AudioChannelSet::mono()
+     && layouts.getMainOutputChannelSet() != AudioChannelSet::stereo())
+        return false;
+
+    // This checks if the input layout matches the output layout
+   #if ! JucePlugin_IsSynth
+    if (layouts.getMainOutputChannelSet() != layouts.getMainInputChannelSet())
+        return false;
+   #endif
+
+    return true;
+  #endif
+}
+#endif
+
+//==============================================================================
+void RchoscillatorsAudioProcessor::getStateInformation (MemoryBlock& destData)
+{
+    XmlElement xml ("RCHOscillatorsDemoSettings");
+    
+    for (auto* param : getParameters())
+    {
+        if (auto* p = dynamic_cast<AudioProcessorParameterWithID*> (param))
+        {
+            xml.setAttribute (p->paramID, p->getValue());
+        }
+    }
+    
+    copyXmlToBinary (xml, destData);
+}
+
+void RchoscillatorsAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
+{
+    ScopedPointer<XmlElement> xmlState (getXmlFromBinary (data, sizeInBytes));
+    
+    if (xmlState.get() != nullptr)
+    {
+        if (xmlState->hasTagName ("RCHOscillatorsDemoSettings"))
+        {
+            for (auto* param : getParameters())
+            {
+                if (auto* p = dynamic_cast<AudioProcessorParameterWithID*> (param))
+                {
+                    p->setValue ((float) xmlState->getDoubleAttribute (p->paramID, p->getValue()));
+                }
+            }
+        }
+    }
+}
+
+//==============================================================================
+AudioProcessorEditor* RchoscillatorsAudioProcessor::createEditor()
+{
+    return new RchoscillatorsAudioProcessorEditor (*this);
+}
+
+// This creates new instances of the plugin..
+AudioProcessor* JUCE_CALLTYPE createPluginFilter()
+{
+    return new RchoscillatorsAudioProcessor();
+}

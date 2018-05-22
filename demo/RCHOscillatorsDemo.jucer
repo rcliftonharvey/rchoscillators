@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="d2RYQp" name="RCHOscillatorsDemo" projectType="audioplug"
+              jucerVersion="5.3.2" companyName="RCH" companyCopyright="Copyright &#169; 2018 Rob Clifton-Harvey"
+              companyEmail="rob@clifton-harvey.com" bundleIdentifier="com.RCH.RCHOscillatorsDemo"
+              pluginFormats="buildVST" pluginCharacteristicsValue="pluginIsSynth"
+              pluginManufacturer="RCH" pluginManufacturerCode="RBCH" pluginCode="RCOD"
+              pluginChannelConfigs="{2,2},{1,1}">
+  <MAINGROUP id="PoAhf8" name="RCHOscillatorsDemo">
+    <GROUP id="{7213E41B-1791-3CC3-6A52-63C4399844BB}" name="Source">
+      <GROUP id="{523AA580-322B-20E2-B3DF-2AB06DF460E0}" name="RCHOscillators">
+        <GROUP id="{E2DD07E6-70C6-AE96-1CB1-13CC610860BC}" name="helpers">
+          <FILE id="sj7BSx" name="constants.h" compile="0" resource="0" file="../library/helpers/constants.h"/>
+          <FILE id="LNPTd3" name="decibels.h" compile="0" resource="0" file="../library/helpers/decibels.h"/>
+          <FILE id="AopH7w" name="max.h" compile="0" resource="0" file="../library/helpers/max.h"/>
+          <FILE id="aE3int" name="sign.h" compile="0" resource="0" file="../library/helpers/sign.h"/>
+          <FILE id="kpE2Zy" name="skeleton.h" compile="0" resource="0" file="../library/helpers/skeleton.h"/>
+          <FILE id="q7NG4Z" name="wrapper.h" compile="0" resource="0" file="../library/helpers/wrapper.h"/>
+        </GROUP>
+        <GROUP id="{09ACDF7D-A9F2-4790-80A7-EE581919C330}" name="oscillators">
+          <GROUP id="{175876AB-D90E-9A8B-1AED-A9A165319D2D}" name="templates">
+            <FILE id="lVCwfN" name="pulse.h" compile="0" resource="0" file="../library/oscillators/templates/pulse.h"/>
+            <FILE id="YqzIS1" name="saw.h" compile="0" resource="0" file="../library/oscillators/templates/saw.h"/>
+            <FILE id="Qo0eWj" name="sine.h" compile="0" resource="0" file="../library/oscillators/templates/sine.h"/>
+            <FILE id="LJUgye" name="square.h" compile="0" resource="0" file="../library/oscillators/templates/square.h"/>
+            <FILE id="JIVkFL" name="triangle.h" compile="0" resource="0" file="../library/oscillators/templates/triangle.h"/>
+          </GROUP>
+          <FILE id="Igr8wz" name="pulse.h" compile="0" resource="0" file="../library/oscillators/pulse.h"/>
+          <FILE id="G1Yi09" name="saw.h" compile="0" resource="0" file="../library/oscillators/saw.h"/>
+          <FILE id="DvOIZc" name="sine.h" compile="0" resource="0" file="../library/oscillators/sine.h"/>
+          <FILE id="Z7OJAS" name="square.h" compile="0" resource="0" file="../library/oscillators/square.h"/>
+          <FILE id="q3cTHz" name="triangle.h" compile="0" resource="0" file="../library/oscillators/triangle.h"/>
+        </GROUP>
+        <FILE id="efyf1I" name="rchosc.h" compile="0" resource="0" file="../library/rchosc.h"/>
+      </GROUP>
+      <FILE id="xx5XYS" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="QOf5k1" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="QKJwpn" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="mixmbH" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" osxArchitecture="Native"/>
+        <CONFIGURATION isDebug="0" name="Release" osxArchitecture="Native" stripLocalSymbols="1"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../../../../../../../Developer/SDKs/JUCE5/modules"/>
+        <MODULEPATH id="juce_events" path="../../../../../../../Developer/SDKs/JUCE5/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../../../../../../Developer/SDKs/JUCE5/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../../../../../Developer/SDKs/JUCE5/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../../../../../../Developer/SDKs/JUCE5/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../../../../../../Developer/SDKs/JUCE5/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../../../../../../../Developer/SDKs/JUCE5/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../../../../../../../Developer/SDKs/JUCE5/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../../../../../../Developer/SDKs/JUCE5/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../../../../../Developer/SDKs/JUCE5/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../../../../../../Developer/SDKs/JUCE5/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../../../../../../Developer/SDKs/JUCE5/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../../../../../../Developer/SDKs/JUCE5/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+  <LIVE_SETTINGS>
+    <OSX/>
+  </LIVE_SETTINGS>
+  <JUCEOPTIONS/>
+</JUCERPROJECT>
