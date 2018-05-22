@@ -20,7 +20,7 @@ This is a pure C++ library that implements all basic oscillator types (sine, tri
 
 This library is compatible with frameworks like [JUCE](https://juce.com/) or [WDL](https://www.cockos.com/wdl/), but it was written with no dependencies, which means you can use it by itself and in any application, without being bound to JUCE, WDL or any such 3rd party frameworks at all.
 
-I have done my best to comment the sources as much as I could or made sense to me, so by reading through the headers you should get a good enough idea of what things can do or what you need to do with them.
+I have done my best to comment the sources as much as I could (or made sense to me), so by reading through the headers you should get a good enough idea of what things can do or what you need to do with them.
 
 The original repository for RCH::Oscillators is right here:<br>
 [https://github.com/rcliftonharvey/rchoscillators]
@@ -29,7 +29,7 @@ The original repository for RCH::Oscillators is right here:<br>
 
 ## How to use
 
-Add all the files from the [RCH::Oscillators](https://github.com/rcliftonharvey/rchoscillators/tree/master/library) folder into a group in your JUCE project. The easiest way to do this is via the "add existing files" option in the files pane of the Projucer app. Then add this line to the beginning of your **PluginProcessor.h**:
+Add all the files from the [library](https://github.com/rcliftonharvey/rchoscillators/tree/master/library) folder into a group in your JUCE project. The easiest way to do this is via the "add existing files" option in the files pane of the Projucer app. Then add this line to the beginning of your **PluginProcessor.h**:
 ```c++
 #include "rchosc.h"
 ```
