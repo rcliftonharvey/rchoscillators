@@ -1,5 +1,5 @@
 # RCH::Oscillators
-#### A library of DSP oscillators in pure C++
+#### A library of fast DSP oscillators in pure C++
 
 -------------------------------------------------------------------------------------------------------
 
@@ -16,7 +16,7 @@
 
 ## Introduction 
 
-This is a pure C++ library that implements all basic oscillator types (sine, triangle, saw rising, saw falling, square and pulse) both as single-channel per-sample "template" classes, as well as multi-channel capable processors (with mono signal) than can handle entire sample buffers in one call.
+This is a pure C++ library that implements all basic oscillator types (sine, triangle, saw rising, saw falling, square and pulse) in fast and easy to use classes, both as single-channel per-sample "templates", as well as multi-channel capable processors (with mono signal) than can handle entire sample buffers in one call.
 
 This library is compatible with frameworks like [JUCE](https://juce.com/) or [WDL](https://www.cockos.com/wdl/), but it was written with no dependencies, which means you can use it by itself and in any application, without being bound to JUCE, WDL or any such 3rd party frameworks at all.
 
