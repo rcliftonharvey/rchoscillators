@@ -58,7 +58,7 @@ oscSine.setAmplitude(volumeInFloatGain);   // if you use float gain factors (typ
 oscSine.setVolume(volumeInDoubleDecibels); // if you use Decibel values (type double)
 ```
 
-The SAW and PULSE oscillators have special properties that are not handled by the regular setup function. It is not required to set these up to get a tone out of the oscillators, but these parameters do offer extended control over the sound, so it's worth mentioning them.
+The *SAW* and *PULSE* oscillators have special properties that are not handled by the regular setup function. It is not required to set these up to get sound out of the oscillators, but these parameters do offer extended control over the sound, so it's worth mentioning them.
 ```c++
 oscSaw.setDirection(-1.0); // wave falls from high to low
 oscSaw.setDirection(1.0);  // wave rises from low to high
