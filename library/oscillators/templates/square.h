@@ -61,6 +61,7 @@ public:
         }
         
         // Evaluate wavetable index: if phase <= 0.5 --> 0, else --> 1
+        // It would also be possible to do IF-branching here, but I wanted to try this.
         const unsigned int index = static_cast<unsigned int>(std::ceil(phase - 0.5));
         
         // Fetch square wave value from wavetable and scale to desired volume

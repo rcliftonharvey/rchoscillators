@@ -9,7 +9,7 @@
 // https://blog.demofox.org/2012/05/19/diy-synthesizer-chapter-2-common-wave-forms/
 //
 /** Creates a mono per-sample pulse wave oscillator with variable pulse width. */
-class Pulse : private RCH::Helpers::Skeleton::Skeleton
+class Pulse : private RCH::Helpers::Skeleton
 {
 public:
     

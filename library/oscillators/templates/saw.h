@@ -9,7 +9,7 @@
 // https://blog.demofox.org/2012/05/19/diy-synthesizer-chapter-2-common-wave-forms/
 //
 /** Creates a mono per-sample saw wave oscillator with variable direction. */
-class Saw : private RCH::Helpers::Skeleton::Skeleton
+class Saw : private RCH::Helpers::Skeleton
 {
 public:
     
