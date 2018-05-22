@@ -87,19 +87,21 @@ To instantiate an example triangle wave oscillator that offers this simple proce
 RCH::Oscillators::Triangle oscTriangle;
 ```
 
-Then set it up somewhere in your processing functions...
+Then set it up somewhere in your processing methods...
 ```c++
 oscTriangle.setup(sampleRateInHz,frequencyInHz,amplitudeInFloatGain);   // if you use float gain factors (type float) or
 oscTriangle.setup(sampleRateInHz,frequencyInHz,volumeInDoubleDecibels); // if you use Decibel values (type double)
 ```
 
-...and send a buffer of float or double samples into it:
+...and send a buffer of **float** or **double** samples into it:
 ```c++
 oscTriangle.fill(buffer,numChannels,numSamples);  // if you want to completely overwrite the buffer
 oscTriangle.add (buffer,numChannels,numSamples);  // if you want to add the sine wave to the buffer
 ```
 
-The **fill** or **add** methods expect an array of channels where each channel is an array of samples. In native C++ lingo, this means the buffer needs to be of type float** or double**, the most common types of sample & channel arrays. If you're using JUCE, your **processBlock** method will present you with a variable named **buffer** in a JUCE specific datatype, the **AudioBuffer**. Despite being an abstraction, it still offers direct access to its channels and samples in the format required for the **fill** and **add** methods of these oscillators. Since the oscillator writes directly into the passed buffer, just make sure you go for WritePointers, not ReadPointers:
+The **fill** or **add** methods expect an array of channels, where each channel is an array of samples. In native C++ lingo, this means the buffer needs to be of type **float**** or **double****, the most common types of sample & channel arrays.
+
+If you're using JUCE, your **processBlock** method will present you with a variable named **buffer** in a JUCE specific datatype, the **AudioBuffer**. Despite being an abstraction, it still offers direct access to its channels and samples in the format required for the **fill** and **add** methods of these oscillators. Since the oscillator writes directly into the passed buffer, just make sure you go for WritePointers, not ReadPointers:
 ```c++
 oscTriangle.fill(buffer.getArrayOfWritePointers(),numChannels,numSamples); // JUCE specific in processBlock
 ```
