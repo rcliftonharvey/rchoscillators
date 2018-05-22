@@ -130,7 +130,8 @@ For a real world example, check out the included [RCHOscillatorsDemo](https://gi
 This source code is provided under the [MIT License](https://en.wikipedia.org/wiki/MIT_License).<br>
 A copy of the MIT license in written form comes in the download of this library.
 
-The JUCE framework itself (required for the demo project) is shipped and licensed separately, see the [JUCE website](https://juce.com) for more information.
+The JUCE framework itself is shipped and licensed separately, see the [JUCE website](https://juce.com) for more information.<br>
+JUCE is only required to compile the demo project, nothing more.
 
 -------------------------------------------------------------------------------------------------------
 
