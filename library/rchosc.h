@@ -9,6 +9,7 @@ namespace RCH
     /** Assorted supporting functionality */
     namespace Helpers
     {
+        #include "helpers/andor.h"
         #include "helpers/constants.h"
         #include "helpers/max.h"
         #include "helpers/sign.h"
