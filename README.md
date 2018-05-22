@@ -43,7 +43,7 @@ To avoid possible collisions with other libraries you may be using in your proje
 **IMPORTANT** *Since I remember struggling with this myself in the early years...<br>
 These oscillators are **stateful**. This means one oscillator instance stays alive all the time, and no matter how many sample blocks you need to fill, you always do it with the same oscillator instance. If you want to have a continuous oscillator wave without any distortion or phase jumps, do not instantiate these in your per-block processing methods, but instantiate them as lasting variables in your header files.* :)
 
-To get started, go ahead and instantiate a simple mono sine oscillator class. On JUCE, you would do this in the **PluginProcessor.h** file:
+To get started, go ahead and instantiate a simple mono sine oscillator class. In JUCE, you would do this in the **PluginProcessor.h** file:
 ```c++
 RCH::Oscillators::Templates::Sine oscSine;
 ```
