@@ -169,7 +169,7 @@ void RchoscillatorsAudioProcessor::processBlock (AudioBuffer<float>& buffer, Mid
         buffer.applyGain(RCH::Helpers::Decibels::ToGain(trims.convertFrom0to1(*volumeInput)));
     }
     
-    // ----------- OSCILLATOR SECTION STARTS BELOW ------------------------------------------------------------------
+// ----------- OSCILLATOR SECTION STARTS BELOW ------------------------------------------------------------------
     
     // SINE OSCILLATOR
     if (*sine == true)
@@ -216,7 +216,7 @@ void RchoscillatorsAudioProcessor::processBlock (AudioBuffer<float>& buffer, Mid
         oscPulse.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
     }
     
-    // ----------- OSCILLATOR SECTION ENDS ABOVE --------------------------------------------------------------------
+// ----------- OSCILLATOR SECTION ENDS ABOVE --------------------------------------------------------------------
     
     // Output trim adjustment
     if (*volumeOutput != 0.5f)
