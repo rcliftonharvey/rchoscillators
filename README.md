@@ -7,10 +7,11 @@
 
 1. [Introduction](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#introduction)
 2. [How to use](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#how-to-use)
-3. [Example project](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#example-project)
-4. [Notes](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#notes)
-5. [License](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#license)
-6. [Credits](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#credits)
+3. [Simplified use](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#simplified-use)
+4. [Example project](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#example-project)
+5. [Notes](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#notes)
+6. [License](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#license)
+7. [Credits](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#credits)
 
 -------------------------------------------------------------------------------------------------------
 
@@ -77,6 +78,10 @@ for (unsigned int sample=0; sample<NumSamples; ++sample)
 ```
 
 Your channel of samples will now be filled with a sine wave, and that's all you need to get going.
+
+-------------------------------------------------------------------------------------------------------
+
+## Simplified use
 
 Now, I'm a lazy guy, so I don't always want to cycle through all the channels and all the samples of a buffer by hand, that just takes up time and space. So I've included a set of wrapper classes that deal with this pesky task automatically. You just pass a C array of **double**s or **float**s into the oscillator, as well as two **unsigned int**s with the number of channels and samples in that C array, and the oscillator will handle it from there.
 
