@@ -3,7 +3,7 @@
 // ---- MODULE CODE STARTS BELOW ---- //
 
 
-/** RCHOscillators are in here */
+/** RCH::Oscillators are in here */
 namespace RCH
 {
     /** Assorted supporting functionality */

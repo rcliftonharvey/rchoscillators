@@ -12,7 +12,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
-// ONLY INCLUDE FOR RCHOSCILLATORS LIBRARY
+// ONLY INCLUDE FOR RCH::OSCILLATORS LIBRARY
 #include "../../library/rchosc.h"
 
 //==============================================================================
@@ -24,12 +24,12 @@ private:
     
     //==============================================================================
     // OSCILLATORS
-    RCH::Oscillators::Sine      oscSine;
-    RCH::Oscillators::Triangle  oscTriangle;
-    RCH::Oscillators::Saw       oscSawRise;
-    RCH::Oscillators::Saw       oscSawFall;
-    RCH::Oscillators::Square    oscSquare;
-    RCH::Oscillators::Pulse     oscPulse;
+    RCH::Oscillators::Sine      oscSine;        // multi-channel sine wave
+    RCH::Oscillators::Triangle  oscTriangle;    // multi-channel triangle
+    RCH::Oscillators::Saw       oscSawRise;     // multi-channel sawtooth
+    RCH::Oscillators::Saw       oscSawFall;     // multi-channel sawtooth
+    RCH::Oscillators::Square    oscSquare;      // multi-channel square wave
+    RCH::Oscillators::Pulse     oscPulse;       // multi-channel pulse wave
     
     //==============================================================================
     // HOST AUTOMATION PARAMETERS
@@ -65,6 +65,7 @@ private:
     AudioParameterFloat* volumeOutput = nullptr;
     
     //==============================================================================
+    // SCALING RANGES
     NormalisableRange<double> frequencies = NormalisableRange<double>(0.0,22000.0,1.0);
     NormalisableRange<double> volumes = NormalisableRange<double> (-180.0,0.0,0.001);
     NormalisableRange<double> trims = NormalisableRange<double> (-12.0,12.0,0.001);
