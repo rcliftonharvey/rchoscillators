@@ -80,7 +80,9 @@ Your channel of samples will now be filled with a sine wave, and that's all you 
 
 Now, I'm a lazy guy, so I don't always want to cycle through all the channels and all the samples of a buffer by hand, that just takes up time and space. So I've included a set of wrapper classes that deal with this pesky task automatically. You just pass a C array of **double**s or **float**s into the oscillator, as well as two **unsigned int**s with the number of channels and samples in that C array, and the oscillator will handle it from there.
 
-In the current state, these wrapper classes will generate a **single mono oscillator**, and insert or add that mono signal onto **all** the buffer's channels equally. Theoretically, there is no limitation to the number of channels that could be processed, a buffer block could have a single channel, or over 200 channels, the oscillators don't care.
+In their current state, these wrapper classes will generate a **single mono oscillator**, and insert or add that mono signal onto **all** the buffer's channels equally. I see no need to have a different oscillator for each channel, it would just make this library needlessly complex to handle.
+
+Theoretically, there is no limitation to the number of channels that could be processed, a buffer block could have a single channel, or over 200 channels, the oscillators don't care. Your CPU might, at some point. :)
 
 To instantiate an example triangle wave oscillator that offers this simple processing method, just instantiate it in your header file like this:
 ```c++
