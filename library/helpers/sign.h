@@ -8,11 +8,15 @@
 template <typename TYPE>
 const TYPE Sign (const TYPE& Value)
 {
-    const TYPE zero     = static_cast<TYPE>(0.0);
-    const TYPE positive = static_cast<TYPE>(1.0);
-    const TYPE negative = static_cast<TYPE>(-1.0);
+//    const TYPE zero     = static_cast<TYPE>(0.0);
+//    const TYPE positive = static_cast<TYPE>(1.0);
+//    const TYPE negative = static_cast<TYPE>(-1.0);
+//
+//    return (Value >= zero) ? positive : negative;
+//
+//  Below method should be more performant since there's no conditional branching
     
-    return (Value >= zero) ? positive : negative;
+    return static_cast<TYPE>(1) - (Value < static_cast<TYPE>(0)) * static_cast<TYPE>(2);
 }
 
 
