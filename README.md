@@ -7,32 +7,18 @@
 
 1. [Introduction](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#introduction)
 2. [How to use](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#how-to-use)
-3. [Simplified use](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#simplified-use)
-4. [Example project](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#example-project)
-5. [Notes](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#notes)
-6. [License](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#license)
-7. [Credits](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#credits)
+3. [How to use](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#how-to-use)
+4. [Simplified use](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#simplified-use)
+5. [Example project](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#example-project)
+6. [Notes](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#notes)
+7. [License](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#license)
+8. [Credits](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#credits)
 
 -------------------------------------------------------------------------------------------------------
 
 ## Introduction 
 
-This is a pure C++ library that implements all sorts of *naive* oscillator types, as well as some *band-limited* flavours, in fast and easy to use classes. The oscillators come both as single-channel per-sample "templates", as well as multi-channel capable processors that can fill entire sample buffers with a sound wave in just one short line of code.
-
-List of included *naive* oscillators:
-+ sine
-+ triangle
-+ saw (rising and falling)
-+ square
-+ square-pulse (square with variable width)
-+ pulse
-
-List of included *band-limited* oscillators:
-+ triangle
-+ saw (rising and falling)
-+ square
-
-I will probably be adding more oscillators and generation methods to this library over time.
+This is a pure C++ library that implements all sorts of *naive* oscillator types, as well as some *band-limited* flavours, in fast and easy to use classes.
 
 This library is compatible with frameworks like [JUCE](https://juce.com/) or [WDL](https://www.cockos.com/wdl/), but it was written with no dependencies, which means you can use it by itself and in any application, without being bound to any such 3rd party frameworks at all.
 
@@ -40,6 +26,27 @@ I have done my best to comment the sources as much as I could (or made sense to 
 
 The original repository for RCH::Oscillators is right here:<br>
 [https://github.com/rcliftonharvey/rchoscillators]
+
+-------------------------------------------------------------------------------------------------------
+
+## Included oscillators
+
+Included *naive* oscillators:
++ sine
++ triangle
++ saw (rising and falling)
++ square
++ square-pulse (square with variable width)
++ pulse
+
+Included *band-limited* oscillators:
++ triangle
++ saw (rising and falling)
++ square
+
+I will probably be adding more oscillators and generation methods to this library over time...
+
+The included oscillators come both as single-channel per-sample "templates", as well as multi-channel capable processors that can fill entire sample buffers with a sound wave in just one short line of code.
 
 -------------------------------------------------------------------------------------------------------
 
