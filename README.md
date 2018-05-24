@@ -6,7 +6,7 @@
 ## Index
 
 1. [Introduction](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#introduction)
-2. [How to use](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#how-to-use)
+2. [Included oscillators](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#included-oscillators)
 3. [How to use](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#how-to-use)
 4. [Simplified use](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#simplified-use)
 5. [Example project](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#example-project)
