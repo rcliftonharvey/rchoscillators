@@ -9,7 +9,7 @@
 // https://blog.demofox.org/2012/05/19/diy-synthesizer-chapter-2-common-wave-forms/
 //
 /** Creates a mono per-sample saw wave oscillator with variable direction. */
-class Saw : private RCH::Helpers::Skeleton
+class Saw : private Helpers::Skeleton
 {
 public:
     
@@ -17,23 +17,23 @@ public:
     ~Saw () {}
     
     //==============================================================================
-    using RCH::Helpers::Skeleton::reset;
+    using Helpers::Skeleton::reset;
     
-    using RCH::Helpers::Skeleton::setSampleRate;
-    using RCH::Helpers::Skeleton::setFrequency;
-    using RCH::Helpers::Skeleton::setAmplitude;
-    using RCH::Helpers::Skeleton::setVolume;
-    using RCH::Helpers::Skeleton::setState;
-    using RCH::Helpers::Skeleton::setPhaseOffset;
-    using RCH::Helpers::Skeleton::setDirection;
+    using Helpers::Skeleton::setSampleRate;
+    using Helpers::Skeleton::setFrequency;
+    using Helpers::Skeleton::setAmplitude;
+    using Helpers::Skeleton::setVolume;
+    using Helpers::Skeleton::setState;
+    using Helpers::Skeleton::setPhaseOffset;
+    using Helpers::Skeleton::setDirection;
     
-    using RCH::Helpers::Skeleton::getSampleRate;
-    using RCH::Helpers::Skeleton::getFrequency;
-    using RCH::Helpers::Skeleton::getAmplitude;
-    using RCH::Helpers::Skeleton::getVolume;
-    using RCH::Helpers::Skeleton::getState;
-    using RCH::Helpers::Skeleton::getPhaseOffset;
-    using RCH::Helpers::Skeleton::getDirection;
+    using Helpers::Skeleton::getSampleRate;
+    using Helpers::Skeleton::getFrequency;
+    using Helpers::Skeleton::getAmplitude;
+    using Helpers::Skeleton::getVolume;
+    using Helpers::Skeleton::getState;
+    using Helpers::Skeleton::getPhaseOffset;
+    using Helpers::Skeleton::getDirection;
     
     //==============================================================================
     /** Calculates and returns the next saw wave sample. */

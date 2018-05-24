@@ -4,8 +4,8 @@
 
     
 // Convenience definitions for this oscillator
-#define OSCILLATOR_TYPE     RCH::Oscillators::Templates::Pulse
-#define OSCILLATOR_WRAPPER  RCH::Helpers::Wrapper
+#define OSCILLATOR_TYPE     Oscillators::Templates::Pulse
+#define OSCILLATOR_WRAPPER  Helpers::Wrapper
 
 
 /** Creates a multi-channel capable pulse wave oscillator.

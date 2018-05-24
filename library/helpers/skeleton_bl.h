@@ -46,7 +46,7 @@
 // harmonics by itself. One could call the sine band-limited by its nature.
 //
 /** Band-limited mono per-sample oscillator skeleton class. */
-class SkeletonBandlimited : RCH::Helpers::Skeleton
+class SkeletonBandlimited : Helpers::Skeleton
 {
 public:
     
@@ -171,35 +171,35 @@ protected:
         return maxHarmonics + 1;
     }
     
-    using RCH::Helpers::Skeleton::samplerate;
-    using RCH::Helpers::Skeleton::frequency;
-    using RCH::Helpers::Skeleton::fractionFrequency;
-    using RCH::Helpers::Skeleton::phase;
-    using RCH::Helpers::Skeleton::state;
-    using RCH::Helpers::Skeleton::amplitude;
-    using RCH::Helpers::Skeleton::direction;
-    using RCH::Helpers::Skeleton::width;
+    using Helpers::Skeleton::samplerate;
+    using Helpers::Skeleton::frequency;
+    using Helpers::Skeleton::fractionFrequency;
+    using Helpers::Skeleton::phase;
+    using Helpers::Skeleton::state;
+    using Helpers::Skeleton::amplitude;
+    using Helpers::Skeleton::direction;
+    using Helpers::Skeleton::width;
     
     //==============================================================================
-    using RCH::Helpers::Skeleton::reset;
+    using Helpers::Skeleton::reset;
     
-    using RCH::Helpers::Skeleton::setAmplitude;
-    using RCH::Helpers::Skeleton::setVolume;
-    using RCH::Helpers::Skeleton::setState;
-    using RCH::Helpers::Skeleton::setPhaseOffset;
-    using RCH::Helpers::Skeleton::setDirection;
-    using RCH::Helpers::Skeleton::setPulseWidth;
-    using RCH::Helpers::Skeleton::setWidth;
+    using Helpers::Skeleton::setAmplitude;
+    using Helpers::Skeleton::setVolume;
+    using Helpers::Skeleton::setState;
+    using Helpers::Skeleton::setPhaseOffset;
+    using Helpers::Skeleton::setDirection;
+    using Helpers::Skeleton::setPulseWidth;
+    using Helpers::Skeleton::setWidth;
     
-    using RCH::Helpers::Skeleton::getSampleRate;
-    using RCH::Helpers::Skeleton::getFrequency;
-    using RCH::Helpers::Skeleton::getAmplitude;
-    using RCH::Helpers::Skeleton::getVolume;
-    using RCH::Helpers::Skeleton::getState;
-    using RCH::Helpers::Skeleton::getPhaseOffset;
-    using RCH::Helpers::Skeleton::getDirection;
-    using RCH::Helpers::Skeleton::getPulseWidth;
-    using RCH::Helpers::Skeleton::getWidth;
+    using Helpers::Skeleton::getSampleRate;
+    using Helpers::Skeleton::getFrequency;
+    using Helpers::Skeleton::getAmplitude;
+    using Helpers::Skeleton::getVolume;
+    using Helpers::Skeleton::getState;
+    using Helpers::Skeleton::getPhaseOffset;
+    using Helpers::Skeleton::getDirection;
+    using Helpers::Skeleton::getPulseWidth;
+    using Helpers::Skeleton::getWidth;
     
 private:
     

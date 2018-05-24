@@ -9,7 +9,7 @@
 // https://www.sfu.ca/sonic-studio/handbook/index.html
 //
 /** Creates a band-limited mono per-sample sawtooth oscillator. */
-class Saw : private RCH::Helpers::SkeletonBandlimited
+class Saw : private Helpers::SkeletonBandlimited
 {
 public:
     
@@ -17,25 +17,25 @@ public:
     ~Saw () {}
     
     //==============================================================================
-    using RCH::Helpers::SkeletonBandlimited::reset;
+    using Helpers::SkeletonBandlimited::reset;
     
-    using RCH::Helpers::SkeletonBandlimited::setSampleRate;
-    using RCH::Helpers::SkeletonBandlimited::setFrequency;
-    using RCH::Helpers::SkeletonBandlimited::setAmplitude;
-    using RCH::Helpers::SkeletonBandlimited::setVolume;
-    using RCH::Helpers::SkeletonBandlimited::setState;
-    using RCH::Helpers::SkeletonBandlimited::setPhaseOffset;
-    using RCH::Helpers::SkeletonBandlimited::setDirection;
-    using RCH::Helpers::SkeletonBandlimited::setMaxHarmonics;
+    using Helpers::SkeletonBandlimited::setSampleRate;
+    using Helpers::SkeletonBandlimited::setFrequency;
+    using Helpers::SkeletonBandlimited::setAmplitude;
+    using Helpers::SkeletonBandlimited::setVolume;
+    using Helpers::SkeletonBandlimited::setState;
+    using Helpers::SkeletonBandlimited::setPhaseOffset;
+    using Helpers::SkeletonBandlimited::setDirection;
+    using Helpers::SkeletonBandlimited::setMaxHarmonics;
     
-    using RCH::Helpers::SkeletonBandlimited::getSampleRate;
-    using RCH::Helpers::SkeletonBandlimited::getFrequency;
-    using RCH::Helpers::SkeletonBandlimited::getAmplitude;
-    using RCH::Helpers::SkeletonBandlimited::getVolume;
-    using RCH::Helpers::SkeletonBandlimited::getState;
-    using RCH::Helpers::SkeletonBandlimited::getPhaseOffset;
-    using RCH::Helpers::SkeletonBandlimited::getDirection;
-    using RCH::Helpers::SkeletonBandlimited::getMaxHarmonics;
+    using Helpers::SkeletonBandlimited::getSampleRate;
+    using Helpers::SkeletonBandlimited::getFrequency;
+    using Helpers::SkeletonBandlimited::getAmplitude;
+    using Helpers::SkeletonBandlimited::getVolume;
+    using Helpers::SkeletonBandlimited::getState;
+    using Helpers::SkeletonBandlimited::getPhaseOffset;
+    using Helpers::SkeletonBandlimited::getDirection;
+    using Helpers::SkeletonBandlimited::getMaxHarmonics;
     
     //==============================================================================
     /** Calculates and returns the next square wave sample. */

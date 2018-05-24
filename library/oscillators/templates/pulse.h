@@ -16,7 +16,7 @@
 // value 0.5 it would generate a regular square wave.
 //
 /** Creates a mono per-sample pulse wave oscillator with variable pulse width. */
-class Pulse : private RCH::Helpers::Skeleton
+class Pulse : private Helpers::Skeleton
 {
 public:
     
@@ -24,23 +24,23 @@ public:
     ~Pulse () {}
     
     //==============================================================================
-    using RCH::Helpers::Skeleton::reset;
+    using Helpers::Skeleton::reset;
     
-    using RCH::Helpers::Skeleton::setSampleRate;
-    using RCH::Helpers::Skeleton::setFrequency;
-    using RCH::Helpers::Skeleton::setAmplitude;
-    using RCH::Helpers::Skeleton::setVolume;
-    using RCH::Helpers::Skeleton::setState;
-    using RCH::Helpers::Skeleton::setPhaseOffset;
-    using RCH::Helpers::Skeleton::setPulseWidth;
+    using Helpers::Skeleton::setSampleRate;
+    using Helpers::Skeleton::setFrequency;
+    using Helpers::Skeleton::setAmplitude;
+    using Helpers::Skeleton::setVolume;
+    using Helpers::Skeleton::setState;
+    using Helpers::Skeleton::setPhaseOffset;
+    using Helpers::Skeleton::setPulseWidth;
     
-    using RCH::Helpers::Skeleton::getSampleRate;
-    using RCH::Helpers::Skeleton::getFrequency;
-    using RCH::Helpers::Skeleton::getAmplitude;
-    using RCH::Helpers::Skeleton::getVolume;
-    using RCH::Helpers::Skeleton::getState;
-    using RCH::Helpers::Skeleton::getPhaseOffset;
-    using RCH::Helpers::Skeleton::getPulseWidth;
+    using Helpers::Skeleton::getSampleRate;
+    using Helpers::Skeleton::getFrequency;
+    using Helpers::Skeleton::getAmplitude;
+    using Helpers::Skeleton::getVolume;
+    using Helpers::Skeleton::getState;
+    using Helpers::Skeleton::getPhaseOffset;
+    using Helpers::Skeleton::getPulseWidth;
     
     //==============================================================================
     /** Calculates and returns the next pulse wave sample. */

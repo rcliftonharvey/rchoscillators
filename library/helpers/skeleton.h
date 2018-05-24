@@ -102,7 +102,7 @@ protected:
     void setVolume (const double& dB)
     {
         // Convert dB to float gain and send to setAmplitude()
-        setAmplitude(RCH::Helpers::Decibels::ToGain(dB));
+        setAmplitude(Helpers::Decibels::ToGain(dB));
     }
     
     /** Sets the current oscillator sample state to a specific value manually. */
@@ -182,7 +182,7 @@ protected:
     /** Returns the currently set oscillator volume in (negative) Decibels. */
     const double getVolume () const
     {
-        return RCH::Helpers::Decibels::FromGain(amplitude);
+        return Helpers::Decibels::FromGain(amplitude);
     }
     
     /** Returns the current oscillator sample state.

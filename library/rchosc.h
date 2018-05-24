@@ -3,6 +3,21 @@
 // ---- MODULE CODE STARTS BELOW ---- //
 
 
+//  RCH::Oscillators
+//
+//  A library of fast DSP oscillators in pure C++
+//  https://github.com/rcliftonharvey/rchoscillators
+//
+//  Copyright © 2018 R. Clifton-Harvey
+//
+//  This library is released under the MIT license, which essentially means
+//  you can do anything you want with it, as long as you credit it somewhere.
+//
+//  A full version of the license file can be found here:
+//  https://github.com/rcliftonharvey/rchoscillators/blob/master/LICENSE
+//  https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#license
+
+
 // Some things in here need C++ vectors
 #include <vector>
 

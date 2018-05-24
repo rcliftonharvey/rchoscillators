@@ -19,7 +19,7 @@
 // making this a bipolar oscillator.
 //
 /** Creates a mono per-sample square wave oscillator with variable pulse width. */
-class SquarePulse : private RCH::Helpers::Skeleton
+class SquarePulse : private Helpers::Skeleton
 {
 public:
     
@@ -27,23 +27,23 @@ public:
     ~SquarePulse () {}
     
     //==============================================================================
-    using RCH::Helpers::Skeleton::reset;
+    using Helpers::Skeleton::reset;
     
-    using RCH::Helpers::Skeleton::setSampleRate;
-    using RCH::Helpers::Skeleton::setFrequency;
-    using RCH::Helpers::Skeleton::setAmplitude;
-    using RCH::Helpers::Skeleton::setVolume;
-    using RCH::Helpers::Skeleton::setState;
-    using RCH::Helpers::Skeleton::setPhaseOffset;
-    using RCH::Helpers::Skeleton::setWidth;
+    using Helpers::Skeleton::setSampleRate;
+    using Helpers::Skeleton::setFrequency;
+    using Helpers::Skeleton::setAmplitude;
+    using Helpers::Skeleton::setVolume;
+    using Helpers::Skeleton::setState;
+    using Helpers::Skeleton::setPhaseOffset;
+    using Helpers::Skeleton::setWidth;
     
-    using RCH::Helpers::Skeleton::getSampleRate;
-    using RCH::Helpers::Skeleton::getFrequency;
-    using RCH::Helpers::Skeleton::getAmplitude;
-    using RCH::Helpers::Skeleton::getVolume;
-    using RCH::Helpers::Skeleton::getState;
-    using RCH::Helpers::Skeleton::getPhaseOffset;
-    using RCH::Helpers::Skeleton::getWidth;
+    using Helpers::Skeleton::getSampleRate;
+    using Helpers::Skeleton::getFrequency;
+    using Helpers::Skeleton::getAmplitude;
+    using Helpers::Skeleton::getVolume;
+    using Helpers::Skeleton::getState;
+    using Helpers::Skeleton::getPhaseOffset;
+    using Helpers::Skeleton::getWidth;
     
     //==============================================================================
     /** Calculates and returns the next square pulse wave sample. */
