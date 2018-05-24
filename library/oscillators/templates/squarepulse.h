@@ -1,27 +1,30 @@
-#ifndef RCHOSC_OSCILLATORS_TEMPLATES_PULSE_H_INCLUDED
-#define RCHOSC_OSCILLATORS_TEMPLATES_PULSE_H_INCLUDED
+#ifndef RCHOSC_OSCILLATORS_TEMPLATES_SQUAREPULSE_H_INCLUDED
+#define RCHOSC_OSCILLATORS_TEMPLATES_SQUAREPULSE_H_INCLUDED
 // ---- MODULE CODE STARTS BELOW ---- //
 
 
-// PULSE WAVE OSCILLATOR
+// SQUARE PULSE WAVE OSCILLATOR
 //
-// This oscillator rests at its negative amplitude extreme all the time. Only at the
-// beginning of each cycle will it shortly ramp up to its positive amplitude extreme
-// and then fall down to its negative amplitude extreme again, where it will remain
-// until the next cycle starts.
+// Bit of a hybrid, but essentially a square wave with adjustable duty cycles.
 //
-// How long the positive pulse lasts, a.k.a. "duty cycle", is set by the width parameter.
-// The value of the width parameter is a fraction of the full cycle, so 1.0 means the
-// wave stays ramped up to the positive amplitude extreme for the entire cycle, and at
-// value 0.5 it would generate a regular square wave.
+// A regular pulse wave would be unipolar, meaning it would rest at its negative
+// extreme all the time and only shortly burst up to its positive extreme. I know
+// that theoretically, mathematically, such a pulse would also be bipolar since it
+// has positive and negative sample values. But the point is that it only ever does
+// upward jumps from its negative resting value, it never oscillates down below it.
 //
-/** Creates a mono per-sample pulse wave oscillator with variable pulse width. */
-class Pulse : private RCH::Helpers::Skeleton
+// This square pulse is a bit different. Like a basic square wave, it alternates
+// between its positive and negative extremes. The positive/negative extreme values
+// last for a fraction of 1/2 cycle each, the silence state is at 0, in the middle,
+// making this a bipolar oscillator.
+//
+/** Creates a mono per-sample square wave oscillator with variable pulse width. */
+class SquarePulse : private RCH::Helpers::Skeleton
 {
 public:
     
-    Pulse  () {}
-    ~Pulse () {}
+    SquarePulse  () {}
+    ~SquarePulse () {}
     
     //==============================================================================
     using RCH::Helpers::Skeleton::reset;
@@ -32,7 +35,7 @@ public:
     using RCH::Helpers::Skeleton::setVolume;
     using RCH::Helpers::Skeleton::setState;
     using RCH::Helpers::Skeleton::setPhaseOffset;
-    using RCH::Helpers::Skeleton::setPulseWidth;
+    using RCH::Helpers::Skeleton::setWidth;
     
     using RCH::Helpers::Skeleton::getSampleRate;
     using RCH::Helpers::Skeleton::getFrequency;
@@ -40,10 +43,10 @@ public:
     using RCH::Helpers::Skeleton::getVolume;
     using RCH::Helpers::Skeleton::getState;
     using RCH::Helpers::Skeleton::getPhaseOffset;
-    using RCH::Helpers::Skeleton::getPulseWidth;
+    using RCH::Helpers::Skeleton::getWidth;
     
     //==============================================================================
-    /** Calculates and returns the next pulse wave sample. */
+    /** Calculates and returns the next square pulse wave sample. */
     const double& tick () override
     {
         // Make sure the basic values are correctly set
@@ -89,14 +92,14 @@ public:
         //     state = 0.0;
         // }
         // IF-branches are slower than simple maths in time critical code, this does the same but faster
-        state = -amplitude + (phase < width) * (2.0 * amplitude);
+        state = ((phase < width) * amplitude) + ((phase >= 0.5) * (phase < 0.5 + width) * -amplitude);
         
         // Return calculated pulse wave value
         return state;
     }
     
-}; // end class RCH::Oscillators::Templates::Pulse
+}; // end class RCH::Oscillators::Templates::SquarePulse
 
 
 // ---- MODULE CODE ENDS ABOVE ---- //
-#endif // #ifndef RCHOSC_OSCILLATORS_TEMPLATES_PULSE_H_INCLUDED
+#endif // #ifndef RCHOSC_OSCILLATORS_TEMPLATES_SQUAREPULSE_H_INCLUDED

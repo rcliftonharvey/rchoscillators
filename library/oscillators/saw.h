@@ -8,7 +8,7 @@
 #define OSCILLATOR_WRAPPER  RCH::Helpers::Wrapper
 
 
-/** Creates a multi-channel capable sine generator.
+/** Creates a multi-channel capable sawtooth generator.
     This will generate a MONO oscillator wave and duplicate
     it to all channels of a passed sample buffer. */
 class Saw : private OSCILLATOR_WRAPPER<OSCILLATOR_TYPE>

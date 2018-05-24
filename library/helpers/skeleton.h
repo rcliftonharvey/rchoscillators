@@ -138,6 +138,16 @@ protected:
     }
     
     /** Sets the pulse width for a pulse wave oscillator.
+        Range is in [0,1] where 0 = silence and 0.5 = square wave. */
+    void setPulseWidth (const double& Width)
+    {
+        if (Width != width)
+        {
+            width = Width;
+        }
+    }
+    
+    /** Sets the pulse width for a square pulse wave oscillator.
         Range is in [0,1] where 0 = silence and 1 = square wave. */
     void setWidth (const double& Width)
     {
@@ -204,13 +214,20 @@ protected:
     
     /** Returns the current pulse width modifier value.
         Only applies to PULSE WAVE oscillators. */
+    const double& getPulseWidth () const
+    {
+        return width;
+    }
+    
+    /** Returns the current square pulse width modifier value.
+        Only applies to SQUARE PULSE WAVE oscillators. */
     const double getWidth () const
     {
         // Must be doubled since stored value is per 1/2 cycle
         return width * 2.0;
     }
     
-}; // class RCH::Oscillators::Templates::Skeleton
+}; // class RCH::Helpers::Skeleton
 
 
 // ---- MODULE CODE ENDS ABOVE ---- //

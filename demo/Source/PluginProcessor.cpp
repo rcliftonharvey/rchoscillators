@@ -38,6 +38,7 @@ RchoscillatorsAudioProcessor::RchoscillatorsAudioProcessor()
     const float paramTrim = trims.convertTo0to1(startupTrim);
     
     addParameter(bypassed            = new AudioParameterBool ("bypassed",              "Bypass",               false));
+    addParameter(bandlimited         = new AudioParameterBool ("bandlimited",           "Bandlimited",          false));
     
     addParameter(volumeInput         = new AudioParameterFloat("volumeInput",           "Input: Trim",          0.0f,  1.0f,  paramTrim));
     
@@ -60,6 +61,11 @@ RchoscillatorsAudioProcessor::RchoscillatorsAudioProcessor()
     addParameter(square              = new AudioParameterBool ("square",                "Square: In",           false));
     addParameter(volumeSquare        = new AudioParameterFloat("volumeSquare",          "Square: Volume",       0.0f,  1.0f,  paramGain));
     addParameter(frequencySquare     = new AudioParameterFloat("frequencySquare",       "Square: Hz",           0.0f,  1.0f,  paramFreq));
+    
+    addParameter(squarePulse         = new AudioParameterBool ("squarePulse",           "Square Pulse: In",     false));
+    addParameter(volumeSquarePulse   = new AudioParameterFloat("volumeSquarePulse",     "Square Pulse: Volume", 0.0f,  1.0f,  paramGain));
+    addParameter(frequencySquarePulse= new AudioParameterFloat("frequencySquarePulse",  "Square Pulse: Hz",     0.0f,  1.0f,  paramFreq));
+    addParameter(widthSquarePulse    = new AudioParameterFloat("widthSquarePulse",      "Square Pulse: Width",  0.0f,  1.0f,  0.5f));
     
     addParameter(pulse               = new AudioParameterBool ("pulse",                 "Pulse: In",            false));
     addParameter(volumePulse         = new AudioParameterFloat("volumePulse",           "Pulse: Volume",        0.0f,  1.0f,  paramGain));
@@ -103,38 +109,80 @@ void RchoscillatorsAudioProcessor::processBlock (AudioBuffer<double>& buffer, Mi
     // TRIANGLE OSCILLATOR
     if (*triangle == true)
     {
-        oscTriangle.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencyTriangle),*volumeTriangle);
-        oscTriangle.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        if (*bandlimited == false)
+        {
+            oscTriangle.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencyTriangle),*volumeTriangle);
+            oscTriangle.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
+        else
+        {
+            oscTriangleBL.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencyTriangle),*volumeTriangle);
+            oscTriangleBL.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
     }
     
     // SAW OSCILLATOR (rising)
     if (*saw == true)
     {
-        oscSawRise.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySaw),*volumeSaw);
-        oscSawRise.setDirection(1.0); // This makes the saw ramp up
-        oscSawRise.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        if (*bandlimited == false)
+        {
+            oscSawRise.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySaw),*volumeSaw);
+            oscSawRise.setDirection(1.0); // This makes the saw ramp up
+            oscSawRise.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
+        else
+        {
+            oscSawRiseBL.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySaw),*volumeSaw);
+            oscSawRiseBL.setDirection(1.0); // This makes the saw ramp up
+            oscSawRiseBL.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
     }
     
     // SAW OSCILLATOR (falling)
     if (*sawReverse == true)
     {
-        oscSawFall.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySawReverse),*volumeSawReverse);
-        oscSawFall.setDirection(-1.0); // This makes the saw ramp down
-        oscSawFall.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        if (*bandlimited == false)
+        {
+            oscSawFall.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySawReverse),*volumeSawReverse);
+            oscSawFall.setDirection(-1.0); // This makes the saw ramp down
+            oscSawFall.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
+        else
+        {
+            oscSawFallBL.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySawReverse),*volumeSawReverse);
+            oscSawFallBL.setDirection(-1.0); // This makes the saw ramp up
+            oscSawFallBL.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
     }
     
     // SQUARE OSCILLATOR (full pulse width)
     if (*square == true)
     {
-        oscSquare.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySquare),*volumeSquare);
-        oscSquare.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        if (*bandlimited == false)
+        {
+            oscSquare.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySquare),*volumeSquare);
+            oscSquare.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
+        else
+        {
+            oscSquareBL.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySquare),*volumeSquare);
+            oscSquareBL.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
     }
     
-    // PULSE OSCILLATOR (variable pulse width)
+    // SQUARE PULSE OSCILLATOR (bipolar, variable pulse width)
+    if (*squarePulse == true)
+    {
+        oscSquarePulse.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySquarePulse),*volumeSquarePulse);
+        oscSquarePulse.setWidth(*widthSquarePulse);
+        oscSquarePulse.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+    }
+    
+    // PULSE OSCILLATOR (unipolar, variable pulse width)
     if (*pulse == true)
     {
         oscPulse.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencyPulse),*volumePulse);
-        oscPulse.setWidth(*widthPulse);
+        oscPulse.setPulseWidth(*widthPulse);
         oscPulse.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
     }
     
@@ -181,38 +229,80 @@ void RchoscillatorsAudioProcessor::processBlock (AudioBuffer<float>& buffer, Mid
     // TRIANGLE OSCILLATOR
     if (*triangle == true)
     {
-        oscTriangle.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencyTriangle),*volumeTriangle);
-        oscTriangle.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        if (*bandlimited == false)
+        {
+            oscTriangle.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencyTriangle),*volumeTriangle);
+            oscTriangle.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
+        else
+        {
+            oscTriangleBL.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencyTriangle),*volumeTriangle);
+            oscTriangleBL.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
     }
     
     // SAW OSCILLATOR (rising)
     if (*saw == true)
     {
-        oscSawRise.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySaw),*volumeSaw);
-        oscSawRise.setDirection(1.0); // This makes the saw ramp up
-        oscSawRise.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        if (*bandlimited == false)
+        {
+            oscSawRise.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySaw),*volumeSaw);
+            oscSawRise.setDirection(1.0); // This makes the saw ramp up
+            oscSawRise.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
+        else
+        {
+            oscSawRiseBL.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySaw),*volumeSaw);
+            oscSawRiseBL.setDirection(1.0); // This makes the saw ramp up
+            oscSawRiseBL.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
     }
     
     // SAW OSCILLATOR (falling)
     if (*sawReverse == true)
     {
-        oscSawFall.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySawReverse),*volumeSawReverse);
-        oscSawFall.setDirection(-1.0); // This makes the saw ramp down
-        oscSawFall.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        if (*bandlimited == false)
+        {
+            oscSawFall.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySawReverse),*volumeSawReverse);
+            oscSawFall.setDirection(-1.0); // This makes the saw ramp down
+            oscSawFall.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
+        else
+        {
+            oscSawFallBL.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySawReverse),*volumeSawReverse);
+            oscSawFallBL.setDirection(-1.0); // This makes the saw ramp up
+            oscSawFallBL.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
     }
     
     // SQUARE OSCILLATOR (full pulse width)
     if (*square == true)
     {
-        oscSquare.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySquare),*volumeSquare);
-        oscSquare.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        if (*bandlimited == false)
+        {
+            oscSquare.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySquare),*volumeSquare);
+            oscSquare.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
+        else
+        {
+            oscSquareBL.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySquare),*volumeSquare);
+            oscSquareBL.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
     }
     
-    // PULSE OSCILLATOR (variable pulse width)
+    // SQUARE PULSE OSCILLATOR (bipolar, variable pulse width)
+    if (*squarePulse == true)
+    {
+        oscSquarePulse.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySquarePulse),*volumeSquarePulse);
+        oscSquarePulse.setWidth(*widthSquarePulse);
+        oscSquarePulse.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+    }
+    
+    // PULSE OSCILLATOR (unipolar, variable pulse width)
     if (*pulse == true)
     {
         oscPulse.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencyPulse),*volumePulse);
-        oscPulse.setWidth(*widthPulse);
+        oscPulse.setPulseWidth(*widthPulse);
         oscPulse.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
     }
     

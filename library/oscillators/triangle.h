@@ -8,7 +8,7 @@
 #define OSCILLATOR_WRAPPER  RCH::Helpers::Wrapper
 
 
-/** Creates a multi-channel capable triangle generator.
+/** Creates a multi-channel capable triangle wave generator.
     This will generate a MONO oscillator wave and duplicate
     it to all channels of a passed sample buffer. */
 class Triangle : private OSCILLATOR_WRAPPER<OSCILLATOR_TYPE>

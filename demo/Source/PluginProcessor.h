@@ -24,16 +24,23 @@ private:
     
     //==============================================================================
     // OSCILLATORS
-    RCH::Oscillators::Sine      oscSine;        // multi-channel sine wave
-    RCH::Oscillators::Triangle  oscTriangle;    // multi-channel triangle
-    RCH::Oscillators::Saw       oscSawRise;     // multi-channel sawtooth
-    RCH::Oscillators::Saw       oscSawFall;     // multi-channel sawtooth
-    RCH::Oscillators::Square    oscSquare;      // multi-channel square wave
-    RCH::Oscillators::Pulse     oscPulse;       // multi-channel pulse wave
+    RCH::Oscillators::Sine          oscSine;        // multi-channel sine wave
+    RCH::Oscillators::Triangle      oscTriangle;    // multi-channel triangle
+    RCH::Oscillators::Saw           oscSawRise;     // multi-channel sawtooth
+    RCH::Oscillators::Saw           oscSawFall;     // multi-channel sawtooth
+    RCH::Oscillators::Square        oscSquare;      // multi-channel square wave
+    RCH::Oscillators::SquarePulse   oscSquarePulse; // multi-channel square pulse wave
+    RCH::Oscillators::Pulse         oscPulse;       // multi-channel pulse wave
+    
+    RCH::Oscillators::Bandlimited::Triangle  oscTriangleBL;
+    RCH::Oscillators::Bandlimited::Saw       oscSawRiseBL;
+    RCH::Oscillators::Bandlimited::Saw       oscSawFallBL;
+    RCH::Oscillators::Bandlimited::Square    oscSquareBL;
     
     //==============================================================================
     // HOST AUTOMATION PARAMETERS
     AudioParameterBool* bypassed = nullptr;
+    AudioParameterBool* bandlimited = nullptr;
     
     AudioParameterFloat* volumeInput = nullptr;
     
@@ -56,6 +63,11 @@ private:
     AudioParameterBool* square = nullptr;
     AudioParameterFloat* volumeSquare = nullptr;
     AudioParameterFloat* frequencySquare = nullptr;
+    
+    AudioParameterBool* squarePulse = nullptr;
+    AudioParameterFloat* volumeSquarePulse = nullptr;
+    AudioParameterFloat* frequencySquarePulse = nullptr;
+    AudioParameterFloat* widthSquarePulse = nullptr;
     
     AudioParameterBool* pulse = nullptr;
     AudioParameterFloat* volumePulse = nullptr;
@@ -83,13 +95,13 @@ public:
     bool isBusesLayoutSupported (const BusesLayout& layouts) const override;
    #endif
 
+    bool supportsDoublePrecisionProcessing () const override {return true;}
     void processBlock (AudioBuffer<double>&, MidiBuffer&) override;
     void processBlock (AudioBuffer<float>&, MidiBuffer&) override;
 
     //==============================================================================
     AudioProcessorEditor* createEditor() override;
     bool hasEditor() const override {return false;}
-    bool supportsDoublePrecisionProcessing () const override {return true;}
     
     //==============================================================================
     const String getName() const override {return JucePlugin_Name;}

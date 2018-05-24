@@ -5,7 +5,7 @@
 
 // TRIANGLE WAVE OSCILLATOR
 //
-// Implemented after Demofox' AdvanceOscillator_Triangle() function
+// Implemented after Alan Wolfe's AdvanceOscilator_Triangle() function
 // https://blog.demofox.org/2012/05/19/diy-synthesizer-chapter-2-common-wave-forms/
 //
 /** Creates a mono per-sample triangle wave oscillator. */

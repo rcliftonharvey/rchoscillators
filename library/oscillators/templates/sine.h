@@ -5,7 +5,7 @@
 
 // SINE WAVE OSCILLATOR
 //
-// Implemented after Demofox' AdvanceOscillator_Sine() function
+// Implemented after Alan Wolfe's AdvanceOscilator_Sine() function
 // https://blog.demofox.org/2012/05/19/diy-synthesizer-chapter-2-common-wave-forms/
 //
 /** Creates a mono per-sample sine wave oscillator. */

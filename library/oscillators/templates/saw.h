@@ -5,7 +5,7 @@
 
 // SAWTOOTH OSCILLATOR
 //
-// Implemented after Demofox' AdvanceOscillator_Saw() function
+// Implemented after Alan Wolfe's AdvanceOscilator_Saw() function
 // https://blog.demofox.org/2012/05/19/diy-synthesizer-chapter-2-common-wave-forms/
 //
 /** Creates a mono per-sample saw wave oscillator with variable direction. */

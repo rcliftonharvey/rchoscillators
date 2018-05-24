@@ -15,20 +15,35 @@
           <FILE id="AopH7w" name="max.h" compile="0" resource="0" file="../library/helpers/max.h"/>
           <FILE id="aE3int" name="sign.h" compile="0" resource="0" file="../library/helpers/sign.h"/>
           <FILE id="kpE2Zy" name="skeleton.h" compile="0" resource="0" file="../library/helpers/skeleton.h"/>
+          <FILE id="KQNend" name="skeleton_bl.h" compile="0" resource="0" file="../library/helpers/skeleton_bl.h"/>
           <FILE id="q7NG4Z" name="wrapper.h" compile="0" resource="0" file="../library/helpers/wrapper.h"/>
         </GROUP>
         <GROUP id="{09ACDF7D-A9F2-4790-80A7-EE581919C330}" name="oscillators">
+          <GROUP id="{A413C565-32D6-A27B-193A-A7010FDE3BE3}" name="bandlimited">
+            <FILE id="ZODS4m" name="pulse.h" compile="0" resource="0" file="../library/oscillators/bandlimited/pulse.h"/>
+            <FILE id="NyOxTF" name="saw.h" compile="0" resource="0" file="../library/oscillators/bandlimited/saw.h"/>
+            <FILE id="SEtqZT" name="square.h" compile="0" resource="0" file="../library/oscillators/bandlimited/square.h"/>
+            <FILE id="An2z8m" name="triangle.h" compile="0" resource="0" file="../library/oscillators/bandlimited/triangle.h"/>
+          </GROUP>
           <GROUP id="{175876AB-D90E-9A8B-1AED-A9A165319D2D}" name="templates">
+            <GROUP id="{2A0E963E-8863-47F1-69C8-2E54C825F772}" name="bandlimited">
+              <FILE id="sxGRij" name="pulse.h" compile="0" resource="0" file="../library/oscillators/templates/bandlimited/pulse.h"/>
+              <FILE id="wabQsy" name="saw.h" compile="0" resource="0" file="../library/oscillators/templates/bandlimited/saw.h"/>
+              <FILE id="PG9dZC" name="square.h" compile="0" resource="0" file="../library/oscillators/templates/bandlimited/square.h"/>
+              <FILE id="iy42lV" name="triangle.h" compile="0" resource="0" file="../library/oscillators/templates/bandlimited/triangle.h"/>
+            </GROUP>
             <FILE id="lVCwfN" name="pulse.h" compile="0" resource="0" file="../library/oscillators/templates/pulse.h"/>
             <FILE id="YqzIS1" name="saw.h" compile="0" resource="0" file="../library/oscillators/templates/saw.h"/>
             <FILE id="Qo0eWj" name="sine.h" compile="0" resource="0" file="../library/oscillators/templates/sine.h"/>
             <FILE id="LJUgye" name="square.h" compile="0" resource="0" file="../library/oscillators/templates/square.h"/>
+            <FILE id="OQU3zE" name="squarepulse.h" compile="0" resource="0" file="../library/oscillators/templates/squarepulse.h"/>
             <FILE id="JIVkFL" name="triangle.h" compile="0" resource="0" file="../library/oscillators/templates/triangle.h"/>
           </GROUP>
           <FILE id="Igr8wz" name="pulse.h" compile="0" resource="0" file="../library/oscillators/pulse.h"/>
           <FILE id="G1Yi09" name="saw.h" compile="0" resource="0" file="../library/oscillators/saw.h"/>
           <FILE id="DvOIZc" name="sine.h" compile="0" resource="0" file="../library/oscillators/sine.h"/>
           <FILE id="Z7OJAS" name="square.h" compile="0" resource="0" file="../library/oscillators/square.h"/>
+          <FILE id="m6exBq" name="squarepulse.h" compile="0" resource="0" file="../library/oscillators/squarepulse.h"/>
           <FILE id="q3cTHz" name="triangle.h" compile="0" resource="0" file="../library/oscillators/triangle.h"/>
         </GROUP>
         <FILE id="efyf1I" name="rchosc.h" compile="0" resource="0" file="../library/rchosc.h"/>

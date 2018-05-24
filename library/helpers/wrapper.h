@@ -73,6 +73,13 @@ protected:
     }
     
     /** Sets the pulse width for a pulse wave oscillator.
+        Range is in [0,1] where 0 = silence and 0.5 = square wave. */
+    void setPulseWidth (const double& PulseWidth)
+    {
+        generator.setPulseWidth(PulseWidth);
+    }
+    
+    /** Sets the pulse width for a square pulse wave oscillator.
         Range is in [0,1] where 0 = silence and 1 = square wave. */
     void setWidth (const double& PulseWidth)
     {
@@ -162,6 +169,13 @@ protected:
     
     /** Returns the current pulse width modifier value.
         Only applies to PULSE WAVE oscillators. */
+    const double& getPulseWidth () const
+    {
+        return generator.getPulseWidth();
+    }
+    
+    /** Returns the current square pulse width modifier value.
+        Only applies to SQUARE PULSE WAVE oscillators. */
     const double& getWidth () const
     {
         return generator.getWidth();

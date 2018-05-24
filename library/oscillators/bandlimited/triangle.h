@@ -1,22 +1,22 @@
-#ifndef RCHOSC_OSCILLATORS_SQUARE_H_INCLUDED
-#define RCHOSC_OSCILLATORS_SQUARE_H_INCLUDED
+#ifndef RCHOSC_OSCILLATORS_BANDLIMITED_TRIANGLE_H_INCLUDED
+#define RCHOSC_OSCILLATORS_BANDLIMITED_TRIANGLE_H_INCLUDED
 // ---- MODULE CODE STARTS BELOW ---- //
 
-    
+
 // Convenience definitions for this oscillator
-#define OSCILLATOR_TYPE     RCH::Oscillators::Templates::Square
+#define OSCILLATOR_TYPE     RCH::Oscillators::Templates::Bandlimited::Triangle
 #define OSCILLATOR_WRAPPER  RCH::Helpers::Wrapper
 
 
-/** Creates a multi-channel capable square wave generator.
+/** Creates a multi-channel capable band-limited triangle generator.
     This will generate a MONO oscillator wave and duplicate
     it to all channels of a passed sample buffer. */
-class Square : private OSCILLATOR_WRAPPER<OSCILLATOR_TYPE>
+class Triangle : private OSCILLATOR_WRAPPER<OSCILLATOR_TYPE>
 {
 public:
     
-    Square  () {}
-    ~Square () {}
+    Triangle  () {}
+    ~Triangle () {}
     
     using OSCILLATOR_WRAPPER<OSCILLATOR_TYPE>::reset;
     using OSCILLATOR_WRAPPER<OSCILLATOR_TYPE>::setup;
@@ -24,7 +24,7 @@ public:
     using OSCILLATOR_WRAPPER<OSCILLATOR_TYPE>::fill;
     using OSCILLATOR_WRAPPER<OSCILLATOR_TYPE>::add;
     
-}; // end class RCH::Oscillators::Square
+}; // end class RCH::Oscillators::Bandlimited::Triangle
 
 
 // Just cleaning up
@@ -39,4 +39,4 @@ public:
 
 
 // ---- MODULE CODE ENDS ABOVE ---- //
-#endif // #ifndef RCHOSC_OSCILLATORS_SQUARE_H_INCLUDED
+#endif // #ifndef RCHOSC_OSCILLATORS_BANDLIMITED_TRIANGLE_H_INCLUDED
