@@ -18,7 +18,9 @@
 //  https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#license
 
 
-// Some things in here need C++ vectors
+// Include C++ dependencies
+#include <cassert>
+#include <cmath>
 #include <vector>
 
 
