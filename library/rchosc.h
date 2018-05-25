@@ -58,6 +58,7 @@ namespace RCH
             /** Band-limited mono per-sample template oscillator classes */
             namespace Bandlimited
             {
+                #include "oscillators/templates/bandlimited/pulse.h"
                 #include "oscillators/templates/bandlimited/saw.h"
                 #include "oscillators/templates/bandlimited/square.h"
                 #include "oscillators/templates/bandlimited/triangle.h"
@@ -77,6 +78,7 @@ namespace RCH
         /** Multi-channel enabled band-limited oscillator classes */
         namespace Bandlimited
         {
+            #include "oscillators/bandlimited/pulse.h"
             #include "oscillators/bandlimited/saw.h"
             #include "oscillators/bandlimited/square.h"
             #include "oscillators/bandlimited/triangle.h"

@@ -170,7 +170,7 @@ void RchoscillatorsAudioProcessor::processBlock (AudioBuffer<double>& buffer, Mi
         }
     }
     
-    // SQUARE PULSE OSCILLATOR (bipolar, variable pulse width)
+    // SQUARE PULSE OSCILLATOR ("bipolar", variable pulse width)
     if (*squarePulse == true)
     {
         oscSquarePulse.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySquarePulse),*volumeSquarePulse);
@@ -178,12 +178,21 @@ void RchoscillatorsAudioProcessor::processBlock (AudioBuffer<double>& buffer, Mi
         oscSquarePulse.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
     }
     
-    // PULSE OSCILLATOR (unipolar, variable pulse width)
+    // PULSE OSCILLATOR ("unipolar", variable pulse width)
     if (*pulse == true)
     {
-        oscPulse.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencyPulse),*volumePulse);
-        oscPulse.setPulseWidth(*widthPulse);
-        oscPulse.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        if (*bandlimited == false)
+        {
+            oscPulse.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencyPulse),*volumePulse);
+            oscPulse.setPulseWidth(*widthPulse);
+            oscPulse.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
+        else
+        {
+            oscPulseBL.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencyPulse),*volumePulse);
+            oscPulseBL.setPulseWidth(*widthPulse);
+            oscPulseBL.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
     }
     
 // ----------- OSCILLATOR SECTION ENDS ABOVE --------------------------------------------------------------------
@@ -290,7 +299,8 @@ void RchoscillatorsAudioProcessor::processBlock (AudioBuffer<float>& buffer, Mid
         }
     }
     
-    // SQUARE PULSE OSCILLATOR (bipolar, variable pulse width)
+    // SQUARE PULSE OSCILLATOR ("bipolar", variable pulse width)
+    // Cycle --> 0 to 1 to 0 to -1 to 0 ...
     if (*squarePulse == true)
     {
         oscSquarePulse.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySquarePulse),*volumeSquarePulse);
@@ -298,12 +308,22 @@ void RchoscillatorsAudioProcessor::processBlock (AudioBuffer<float>& buffer, Mid
         oscSquarePulse.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
     }
     
-    // PULSE OSCILLATOR (unipolar, variable pulse width)
+    // PULSE OSCILLATOR ("unipolar", variable pulse width)
+    // Cycle --> -1 to +1 to -1 (rest) to +1 to -1 (rest) ...
     if (*pulse == true)
     {
-        oscPulse.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencyPulse),*volumePulse);
-        oscPulse.setPulseWidth(*widthPulse);
-        oscPulse.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        if (*bandlimited == false)
+        {
+            oscPulse.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencyPulse),*volumePulse);
+            oscPulse.setPulseWidth(*widthPulse);
+            oscPulse.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
+        else
+        {
+            oscPulseBL.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencyPulse),*volumePulse);
+            oscPulseBL.setPulseWidth(*widthPulse);
+            oscPulseBL.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
     }
     
 // ----------- OSCILLATOR SECTION ENDS ABOVE --------------------------------------------------------------------

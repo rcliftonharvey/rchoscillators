@@ -36,6 +36,7 @@ private:
     RCH::Oscillators::Bandlimited::Saw       oscSawRiseBL;
     RCH::Oscillators::Bandlimited::Saw       oscSawFallBL;
     RCH::Oscillators::Bandlimited::Square    oscSquareBL;
+    RCH::Oscillators::Bandlimited::Pulse     oscPulseBL;
     
     //==============================================================================
     // HOST AUTOMATION PARAMETERS
