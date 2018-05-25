@@ -46,7 +46,7 @@
 // harmonics by itself. One could call the sine band-limited by its nature.
 //
 /** Band-limited mono per-sample oscillator skeleton class. */
-class SkeletonBandlimited : Helpers::Skeleton
+class SkeletonBandlimited : public Helpers::Skeleton
 {
 public:
     
@@ -170,36 +170,6 @@ protected:
     {
         return maxHarmonics + 1;
     }
-    
-    using Helpers::Skeleton::samplerate;
-    using Helpers::Skeleton::frequency;
-    using Helpers::Skeleton::fractionFrequency;
-    using Helpers::Skeleton::phase;
-    using Helpers::Skeleton::state;
-    using Helpers::Skeleton::amplitude;
-    using Helpers::Skeleton::direction;
-    using Helpers::Skeleton::width;
-    
-    //==============================================================================
-    using Helpers::Skeleton::reset;
-    
-    using Helpers::Skeleton::setAmplitude;
-    using Helpers::Skeleton::setVolume;
-    using Helpers::Skeleton::setState;
-    using Helpers::Skeleton::setPhaseOffset;
-    using Helpers::Skeleton::setDirection;
-    using Helpers::Skeleton::setPulseWidth;
-    using Helpers::Skeleton::setWidth;
-    
-    using Helpers::Skeleton::getSampleRate;
-    using Helpers::Skeleton::getFrequency;
-    using Helpers::Skeleton::getAmplitude;
-    using Helpers::Skeleton::getVolume;
-    using Helpers::Skeleton::getState;
-    using Helpers::Skeleton::getPhaseOffset;
-    using Helpers::Skeleton::getDirection;
-    using Helpers::Skeleton::getPulseWidth;
-    using Helpers::Skeleton::getWidth;
     
 private:
     
