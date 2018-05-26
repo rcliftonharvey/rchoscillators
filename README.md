@@ -59,16 +59,16 @@ It's probably worth mentioning that since the *band-limited* oscillators are cre
 
 While they are guaranteed to be aliasing-free, their accuracy depends on how many harmonic sine waves are calculated. For some wave shapes you can get away with generating just a few harmonic overtones to get a fairly smooth oscillation, and for others it's necessary to calculate quite a lot of harmonics until they start looking close to what they should look like.
 
-A *harmonic overtone* is essentially a multiple of the base frequency. The lower the frequency of the wave, the more harmonics have to be generated to fill the spectrum, and the higher the frequency of the wave, the less harmonics have to be generated. This means that a simple saw wave could hardly touch the CPU at really high frequencies, but possibly bring your machine to a near halt at 1 Hz.
+> A *harmonic overtone* is essentially a multiple of the base frequency. The lower the frequency of the wave, the more harmonics have to be generated to fill the spectrum, and the higher the frequency of the wave, the less harmonics have to be generated. This means that a simple saw wave could hardly touch the CPU at really high frequencies, but possibly bring your machine to a near halt at 1 Hz.
 
 **Example**<br>
 A saw wave should oscillate at 1.000 Hz. With a sample rate of 44.100 Hz, the highest frequency that can be calculated is 22.050 Hz. Since saw waves contain even and odd harmonics, to get an accurate band-limited saw wave, an additional sine wave at every multiple of the base frequency needs to be generated and added. One at 2.000 Hz (2x 1.000 Hz), one at 3.000 Hz (3x 1.000 Hz), one at 4.000 Hz (4x 1.000 Hz), and so on until it reaches the 1/2 sample rate nyquist limit at, in this case, 22.050 Hz.
 
-Overall, including the sine wave at the base frequency, it's necessary to calculate and add **22** sine waves to get a clean band-limited saw wave at 1.000 Hz.
+> Overall, including the sine wave at the base frequency, it's necessary to calculate and add **22** sine waves to get a clean band-limited saw wave at 1.000 Hz.
 
 Now, if the saw wave were to oscillate at 10 Hz, at the same sample rate of 44.100 Hz and the same nyquist cutoff at 22.050 Hz, things would get tricky. The same rule applies: to generate a clean saw wave, every multiple of the base frequency up to the 1/2 sample rate nyquist limit has to be calculated and added in. This means we need an additional sine wave at 20 Hz (2x 10 Hz), one at 30 Hz (3x 10 Hz), one at 40 Hz (4x 10 Hz) and so on, again until we hit the 22.050 Hz limit.
 
-Overall, including the sine wave at the base frequency, it's necessary to calculate and add **2.205** sine waves to get a clean band-limited saw wave at 10 Hz.
+> Overall, including the sine wave at the base frequency, it's necessary to calculate and add **2.205** sine waves to get a clean band-limited saw wave at 10 Hz.
 
 2.205 in contrast to 22 before... quite a jump.
 
@@ -95,8 +95,8 @@ Depending on your compiler and workspace settings, you will probably have to adj
 
 To avoid possible collisions with other libraries you may be using in your projects, all the classes in this library reside in the **RCH::** namespace by default. You're of course welcome to change the namespace in the [rchosc.h](https://github.com/rcliftonharvey/rchoscillators/tree/master/library/rchosc.h) main include.
 
-**IMPORTANT** *Since I remember struggling with this myself in the early years...<br>
-These oscillators are **stateful**. This means one oscillator instance stays alive all the time, and no matter how many sample blocks you need to fill, you always do it with the same oscillator instance. If you want to have a continuous oscillator wave without any distortion or phase jumps, do not instantiate these in your per-block processing methods, but instantiate them as lasting variables in your header files.* :)
+> **IMPORTANT** *Since I remember struggling with this myself in the early years...<br>
+> These oscillators are **stateful**. This means one oscillator instance stays alive all the time, and no matter how many sample blocks you need to fill, you always do it with the same oscillator instance. If you want to have a continuous oscillator wave without any distortion or phase jumps, do not instantiate these in your per-block processing methods, but instantiate them as lasting variables in your header files.* :)
 
 To get started, go ahead and instantiate a simple mono sine oscillator class. In JUCE, you would do this in the **PluginProcessor.h** file, for WDL it would be in your main project .h file.
 ```c++
