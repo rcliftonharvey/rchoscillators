@@ -55,7 +55,7 @@ public:
     #define NUM_HARMONICS_MAX_HARD 44100     // 1 Hz --> 44.100 Hz = full  88.2 sample rate spectrum
     #define NUM_HARMONICS_MAX_FULL 22050     // 1 Hz --> 22.050 Hz = full  44.1 sample rate spectrum
     #define NUM_HARMONICS_MAX_GOOD  2500     // 1 Hz -->  2.500 Hz, 10 --> 25.000 Hz, 100 --> 250.000
-    #define NUM_HARMONICS_MAX_OKAY   500     // 1 Hz -->    500 Hz, 10 -->  5.000 Hz, 100 -->  50.000
+    #define NUM_HARMONICS_MAX_OKAY   801     // 1 Hz -->    801 Hz, 10 -->  8.100 Hz, 100 -->  81.000
     #define NUM_HARMONICS_MAX_FAIR   250     // 1 Hz -->    250 Hz, 10 -->  2.500 Hz, 100 -->  25.000
     #define NUM_HARMONICS_MAX_FAST   100     // 1 Hz -->    100 Hz, 10 -->  1.000 Hz, 100 -->  10.000
     #define NUM_HARMONICS_MAX_CENT    25     // 1 Hz -->     25 Hz, 10 -->    250 Hz, 100 -->   2.500
