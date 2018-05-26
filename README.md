@@ -93,7 +93,7 @@ Depending on your compiler and workspace settings, you will probably have to adj
 #include "rchosc.h"
 ```
 
-To avoid possible collisions with other libraries you may be using in your projects, all the classes in this library reside in the **RCH::** namespace by default. You're of course welcome to change the namespace in the [rchosc.h](https://github.com/rcliftonharvey/rchoscillators/tree/master/library/rchosc.h) main include file.
+To avoid possible collisions with other libraries you may be using in your projects, all the classes in this library reside in the **RCH::** namespace by default. You're of course welcome to change the namespace in the [rchosc.h](https://github.com/rcliftonharvey/rchoscillators/tree/master/library/rchosc.h) main include.
 
 **IMPORTANT** *Since I remember struggling with this myself in the early years...<br>
 These oscillators are **stateful**. This means one oscillator instance stays alive all the time, and no matter how many sample blocks you need to fill, you always do it with the same oscillator instance. If you want to have a continuous oscillator wave without any distortion or phase jumps, do not instantiate these in your per-block processing methods, but instantiate them as lasting variables in your header files.* :)
