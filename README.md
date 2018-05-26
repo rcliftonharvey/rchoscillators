@@ -76,6 +76,10 @@ Since triangle and square waves consist of only odd-order harmonics, it's suffic
 
 I built an accuracy setting into the band-limited oscillators, check the [skeleton_bl.h](https://github.com/rcliftonharvey/rchoscillators/tree/master/library/helpers/skeleton_bl.h) header file for the exact limit definitions. An accuracy of 7 will guarantee that all harmonics up to 22.050 Hz will be calculated for even a 1 Hz wave. You may want to go higher than that, since a project sample rate of 192 kHz could handle frequencies up to 96.000 Hz and stopping at 22.050 Hz could look (and sound) truncated... eventually, it all depends on how accurate you want it to be. But for most applications, you should probably be able to get away with an accuracy setting of 3-4.
 
+Because of this difficulty, I would recommend using these additively band-limited oscillators for synthesis only, and falling back to naive oscillators for modulation applications like LFOs.
+
+As a reference: the lowest (useful) MIDI note is A0, equivalent to a frequency of 27.5 Hz. Using the 22.050 Hz nyquist limit for 44.100 Hz sample rate, that would mean generating 801 partial sine waves.
+
 If you didn't know: there is no band-limited sine wave mode. Because a sine wave does not have any harmonic overtones except its own base frequency, it is basically band-limited by design. That's why it's so reliable and convenient to use as a building block for other, more complex wave shapes.
 
 -------------------------------------------------------------------------------------------------------
