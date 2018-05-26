@@ -32,16 +32,19 @@ private:
     RCH::Oscillators::SquarePulse   oscSquarePulse; // multi-channel square pulse wave
     RCH::Oscillators::Pulse         oscPulse;       // multi-channel pulse wave
     
-    RCH::Oscillators::Bandlimited::Triangle  oscTriangleBL;
-    RCH::Oscillators::Bandlimited::Saw       oscSawRiseBL;
-    RCH::Oscillators::Bandlimited::Saw       oscSawFallBL;
-    RCH::Oscillators::Bandlimited::Square    oscSquareBL;
-    RCH::Oscillators::Bandlimited::Pulse     oscPulseBL;
+    RCH::Oscillators::Bandlimited::Triangle     oscTriangleBL;
+    RCH::Oscillators::Bandlimited::Saw          oscSawRiseBL;
+    RCH::Oscillators::Bandlimited::Saw          oscSawFallBL;
+    RCH::Oscillators::Bandlimited::Square       oscSquareBL;
+    RCH::Oscillators::Bandlimited::SquarePulse  oscSquarePulseBL;
+    RCH::Oscillators::Bandlimited::Pulse        oscPulseBL;
     
     //==============================================================================
     // HOST AUTOMATION PARAMETERS
     AudioParameterBool* bypassed = nullptr;
+    
     AudioParameterBool* bandlimited = nullptr;
+    AudioParameterInt* bandlimitQuality = nullptr;
     
     AudioParameterFloat* volumeInput = nullptr;
     

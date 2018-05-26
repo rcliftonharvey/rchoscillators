@@ -23,6 +23,11 @@
     #endif                  /* 2 * PI ... moar nom */
     #define M_2PI           6.283185307179586476925286766559005768394338798750211642
 
+    #ifdef M_1_PI
+    #undef M_1_PI
+    #endif                  /* 1/PI           */
+    #define M_1_PI          0.318309886183790671537767526745028724068919291480912898
+
     #ifdef M_2_PI
     #undef M_2_PI
     #endif                  /* 2/PI           */

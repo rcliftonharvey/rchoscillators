@@ -38,7 +38,9 @@ RchoscillatorsAudioProcessor::RchoscillatorsAudioProcessor()
     const float paramTrim = trims.convertTo0to1(startupTrim);
     
     addParameter(bypassed            = new AudioParameterBool ("bypassed",              "Bypass",               false));
-    addParameter(bandlimited         = new AudioParameterBool ("bandlimited",           "Bandlimited",          false));
+    
+    addParameter(bandlimited         = new AudioParameterBool ("bandlimited",           "Band-limit: In",       false));
+    addParameter(bandlimitQuality    = new AudioParameterInt  ("bandlimitQuality",      "Band-limit: Quality",  1,     10,    7));
     
     addParameter(volumeInput         = new AudioParameterFloat("volumeInput",           "Input: Trim",          0.0f,  1.0f,  paramTrim));
     
@@ -117,6 +119,7 @@ void RchoscillatorsAudioProcessor::processBlock (AudioBuffer<double>& buffer, Mi
         else
         {
             oscTriangleBL.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencyTriangle),*volumeTriangle);
+            oscTriangleBL.setAccuracy(static_cast<unsigned int>(*bandlimitQuality));
             oscTriangleBL.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
         }
     }
@@ -133,6 +136,7 @@ void RchoscillatorsAudioProcessor::processBlock (AudioBuffer<double>& buffer, Mi
         else
         {
             oscSawRiseBL.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySaw),*volumeSaw);
+            oscSawRiseBL.setAccuracy(static_cast<unsigned int>(*bandlimitQuality));
             oscSawRiseBL.setDirection(1.0); // This makes the saw ramp up
             oscSawRiseBL.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
         }
@@ -150,6 +154,7 @@ void RchoscillatorsAudioProcessor::processBlock (AudioBuffer<double>& buffer, Mi
         else
         {
             oscSawFallBL.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySawReverse),*volumeSawReverse);
+            oscSawFallBL.setAccuracy(static_cast<unsigned int>(*bandlimitQuality));
             oscSawFallBL.setDirection(-1.0); // This makes the saw ramp up
             oscSawFallBL.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
         }
@@ -166,19 +171,32 @@ void RchoscillatorsAudioProcessor::processBlock (AudioBuffer<double>& buffer, Mi
         else
         {
             oscSquareBL.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySquare),*volumeSquare);
+            oscSquareBL.setAccuracy(static_cast<unsigned int>(*bandlimitQuality));
             oscSquareBL.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
         }
     }
     
     // SQUARE PULSE OSCILLATOR ("bipolar", variable pulse width)
+    // Cycle --> 0 to 1 to 0 to -1 to 0 ...
     if (*squarePulse == true)
     {
-        oscSquarePulse.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySquarePulse),*volumeSquarePulse);
-        oscSquarePulse.setWidth(*widthSquarePulse);
-        oscSquarePulse.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        if (*bandlimited == false)
+        {
+            oscSquarePulse.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySquarePulse),*volumeSquarePulse);
+            oscSquarePulse.setWidth(*widthSquarePulse);
+            oscSquarePulse.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
+        else
+        {
+            oscSquarePulseBL.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySquarePulse),*volumeSquarePulse);
+            oscSquarePulseBL.setAccuracy(static_cast<unsigned int>(*bandlimitQuality));
+            oscSquarePulseBL.setWidth(*widthSquarePulse);
+            oscSquarePulseBL.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
     }
     
     // PULSE OSCILLATOR ("unipolar", variable pulse width)
+    // Cycle --> -1 to +1 to -1 (rest) to +1 to -1 (rest) ...
     if (*pulse == true)
     {
         if (*bandlimited == false)
@@ -190,6 +208,7 @@ void RchoscillatorsAudioProcessor::processBlock (AudioBuffer<double>& buffer, Mi
         else
         {
             oscPulseBL.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencyPulse),*volumePulse);
+            oscPulseBL.setAccuracy(static_cast<unsigned int>(*bandlimitQuality));
             oscPulseBL.setPulseWidth(*widthPulse);
             oscPulseBL.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
         }
@@ -246,6 +265,7 @@ void RchoscillatorsAudioProcessor::processBlock (AudioBuffer<float>& buffer, Mid
         else
         {
             oscTriangleBL.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencyTriangle),*volumeTriangle);
+            oscTriangleBL.setAccuracy(static_cast<unsigned int>(*bandlimitQuality));
             oscTriangleBL.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
         }
     }
@@ -262,6 +282,7 @@ void RchoscillatorsAudioProcessor::processBlock (AudioBuffer<float>& buffer, Mid
         else
         {
             oscSawRiseBL.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySaw),*volumeSaw);
+            oscSawRiseBL.setAccuracy(static_cast<unsigned int>(*bandlimitQuality));
             oscSawRiseBL.setDirection(1.0); // This makes the saw ramp up
             oscSawRiseBL.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
         }
@@ -279,6 +300,7 @@ void RchoscillatorsAudioProcessor::processBlock (AudioBuffer<float>& buffer, Mid
         else
         {
             oscSawFallBL.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySawReverse),*volumeSawReverse);
+            oscSawFallBL.setAccuracy(static_cast<unsigned int>(*bandlimitQuality));
             oscSawFallBL.setDirection(-1.0); // This makes the saw ramp up
             oscSawFallBL.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
         }
@@ -295,6 +317,7 @@ void RchoscillatorsAudioProcessor::processBlock (AudioBuffer<float>& buffer, Mid
         else
         {
             oscSquareBL.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySquare),*volumeSquare);
+            oscSquareBL.setAccuracy(static_cast<unsigned int>(*bandlimitQuality));
             oscSquareBL.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
         }
     }
@@ -303,9 +326,19 @@ void RchoscillatorsAudioProcessor::processBlock (AudioBuffer<float>& buffer, Mid
     // Cycle --> 0 to 1 to 0 to -1 to 0 ...
     if (*squarePulse == true)
     {
-        oscSquarePulse.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySquarePulse),*volumeSquarePulse);
-        oscSquarePulse.setWidth(*widthSquarePulse);
-        oscSquarePulse.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        if (*bandlimited == false)
+        {
+            oscSquarePulse.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySquarePulse),*volumeSquarePulse);
+            oscSquarePulse.setWidth(*widthSquarePulse);
+            oscSquarePulse.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
+        else
+        {
+            oscSquarePulseBL.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencySquarePulse),*volumeSquarePulse);
+            oscSquarePulseBL.setAccuracy(static_cast<unsigned int>(*bandlimitQuality));
+            oscSquarePulseBL.setWidth(*widthSquarePulse);
+            oscSquarePulseBL.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
+        }
     }
     
     // PULSE OSCILLATOR ("unipolar", variable pulse width)
@@ -321,6 +354,7 @@ void RchoscillatorsAudioProcessor::processBlock (AudioBuffer<float>& buffer, Mid
         else
         {
             oscPulseBL.setup(getSampleRate(),frequencies.convertFrom0to1(*frequencyPulse),*volumePulse);
+            oscPulseBL.setAccuracy(static_cast<unsigned int>(*bandlimitQuality));
             oscPulseBL.setPulseWidth(*widthPulse);
             oscPulseBL.add(buffer.getArrayOfWritePointers(),numChannels,numSamples);
         }

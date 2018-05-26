@@ -61,6 +61,7 @@ namespace RCH
                 #include "oscillators/templates/bandlimited/pulse.h"
                 #include "oscillators/templates/bandlimited/saw.h"
                 #include "oscillators/templates/bandlimited/square.h"
+                #include "oscillators/templates/bandlimited/squarepulse.h"
                 #include "oscillators/templates/bandlimited/triangle.h"
                 
             } // end namespace RCH::Oscillators::Templates::Bandlimited
@@ -81,6 +82,7 @@ namespace RCH
             #include "oscillators/bandlimited/pulse.h"
             #include "oscillators/bandlimited/saw.h"
             #include "oscillators/bandlimited/square.h"
+            #include "oscillators/bandlimited/squarepulse.h"
             #include "oscillators/bandlimited/triangle.h"
             
         } // end namespace RCH::Oscillators::Bandlimited

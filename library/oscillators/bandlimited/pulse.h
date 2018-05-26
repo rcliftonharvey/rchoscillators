@@ -20,7 +20,9 @@ public:
     
     using OSCILLATOR_WRAPPER<OSCILLATOR_TYPE>::reset;
     using OSCILLATOR_WRAPPER<OSCILLATOR_TYPE>::setup;
+    
     using OSCILLATOR_WRAPPER<OSCILLATOR_TYPE>::setPulseWidth;
+    using OSCILLATOR_WRAPPER<OSCILLATOR_TYPE>::setAccuracy;
     
     using OSCILLATOR_WRAPPER<OSCILLATOR_TYPE>::fill;
     using OSCILLATOR_WRAPPER<OSCILLATOR_TYPE>::add;
@@ -29,14 +31,8 @@ public:
 
 
 // Just cleaning up
-#ifdef OSCILLATOR_WRAPPER
 #undef OSCILLATOR_WRAPPER
-#endif
-
-// Just cleaning up
-#ifdef OSCILLATOR_TYPE
 #undef OSCILLATOR_TYPE
-#endif
 
 
 // ---- MODULE CODE ENDS ABOVE ---- //

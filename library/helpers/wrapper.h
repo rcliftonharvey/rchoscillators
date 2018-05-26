@@ -86,6 +86,13 @@ protected:
         generator.setWidth(PulseWidth);
     }
     
+    /** Band-limited oscillators only! Sets the amount of harmonics that will be
+        calculated. Less = lighter on CPU, more = higher precision, default is 7. */
+    void setAccuracy (const unsigned int& Quality)
+    {
+        generator.setMaxHarmonics(Quality);
+    }
+    
     //==============================================================================
     /** Convenience function to set up most parameters at once.
         Accepts an optional double Phase Offset parameter at the end. */
@@ -179,6 +186,11 @@ protected:
     const double& getWidth () const
     {
         return generator.getWidth();
+    }
+    
+    const unsigned int& getAccuracy () const
+    {
+        return generator.getMaxHarmonics();
     }
     
 public:

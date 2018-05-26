@@ -76,6 +76,7 @@
 		75E6C59A303156C97D8314BC = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = "include_juce_audio_plugin_client_VST_utils.mm"; path = "../../JuceLibraryCode/include_juce_audio_plugin_client_VST_utils.mm"; sourceTree = "SOURCE_ROOT"; };
 		78B243DCA50176D0A0846CBA = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		78E412FAC126206C728D1B66 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = saw.h; path = ../../../library/oscillators/templates/saw.h; sourceTree = "SOURCE_ROOT"; };
+		7C98EDB8DA09E045ED80B89E = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = squarepulse.h; path = ../../../library/oscillators/bandlimited/squarepulse.h; sourceTree = "SOURCE_ROOT"; };
 		7CF21DBF37D6C024BF456B16 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = skeleton.h; path = ../../../library/helpers/skeleton.h; sourceTree = "SOURCE_ROOT"; };
 		811BCA4E2ED4543D0E045AE5 = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = "include_juce_gui_basics.mm"; path = "../../JuceLibraryCode/include_juce_gui_basics.mm"; sourceTree = "SOURCE_ROOT"; };
 		86A49FD50B35068498BF1E60 = {isa = PBXFileReference; lastKnownFileType = file; name = "juce_audio_formats"; path = "/Developer/SDKs/JUCE5/modules/juce_audio_formats"; sourceTree = "<absolute>"; };
@@ -97,6 +98,7 @@
 		BC332DF364112B49D96089A5 = {isa = PBXFileReference; lastKnownFileType = file; name = "juce_data_structures"; path = "/Developer/SDKs/JUCE5/modules/juce_data_structures"; sourceTree = "<absolute>"; };
 		BEA9A86C95D379A0C72B2A57 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = sine.h; path = ../../../library/oscillators/templates/sine.h; sourceTree = "SOURCE_ROOT"; };
 		C9E703B0D09E8E066917B90E = {isa = PBXFileReference; lastKnownFileType = file; name = "juce_events"; path = "/Developer/SDKs/JUCE5/modules/juce_events"; sourceTree = "<absolute>"; };
+		CCD554286BC0E5E99762833C = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = squarepulse.h; path = ../../../library/oscillators/templates/bandlimited/squarepulse.h; sourceTree = "SOURCE_ROOT"; };
 		CD84DC8B1A75513B4C2725B9 = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D3ABF66801014F338D2A972C = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = decibels.h; path = ../../../library/helpers/decibels.h; sourceTree = "SOURCE_ROOT"; };
 		D9204397424618FEBA8C1096 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = saw.h; path = ../../../library/oscillators/bandlimited/saw.h; sourceTree = "SOURCE_ROOT"; };
@@ -125,11 +127,13 @@
 					44017FDB2BEB7A2694B2A0AA,
 					D9204397424618FEBA8C1096,
 					27ABFEA97B6C283C56C471D7,
+					7C98EDB8DA09E045ED80B89E,
 					24E20050A5154BCE75923126, ); name = bandlimited; sourceTree = "<group>"; };
 		E6A0D1F29B77E7802C2065AA = {isa = PBXGroup; children = (
 					37571E51222D9D70B2622EE2,
 					F1AE7D310D65BEDE0456C648,
 					923DE57B36A6A9963986D202,
+					CCD554286BC0E5E99762833C,
 					8CBF5E5A522570C5AC7B3F34, ); name = bandlimited; sourceTree = "<group>"; };
 		F3465A2EF99E51982ED28326 = {isa = PBXGroup; children = (
 					E6A0D1F29B77E7802C2065AA,
