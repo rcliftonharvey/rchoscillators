@@ -20,11 +20,11 @@
 // running at 192 kHz, then Nyquist will be at 96 kHz.
 //
 // For a square wave at 1 kHz in a project running at 44.1 kHz, there are only
-// about 10 octaves/multiples/harmonics/overtones until we reach Nyquist, so
-// there's not a lot to generate. But if the project runs at 96 kHz, putting
-// Nyquist at 48 kHz, and you're trying to generate a 24 Hz square wave...
-// that would mean there are now Nyquist / Frequency = 96.000 / 48 = 2000 sine
-// waves to add together until the overtones reach the Nyquist barrier.
+// about 10 multiples/harmonics/overtones until we reach Nyquist, so there's
+// not a lot to generate. But if the project runs at 96 kHz, putting Nyquist
+// at 48 kHz, and you're trying to generate a 24 Hz square wave... that would
+// mean there are now Nyquist / Frequency = 96.000 / 48 = 2000 sine waves to
+// add together until the overtones reach the Nyquist barrier.
 //
 // That's why I built in the possibility to pick from 10 "accuracy" modes.
 // They're essentially a bunch of "maximum number of harmonics to calculate"
@@ -51,16 +51,16 @@ class SkeletonBandlimited : public Helpers::Skeleton
 public:
     
     /* --------------------------- limit ------ base --> limit --- base -> limit --- base --> limit ---*/
-    #define NUM_HARMONICS_MAX_BEST 96000     // 1 Hz --> 96.000 Hz
-    #define NUM_HARMONICS_MAX_HARD 44100     // 1 Hz --> 44.100 Hz
-    #define NUM_HARMONICS_MAX_FULL 22050     // 1 Hz --> 22.050 Hz
-    #define NUM_HARMONICS_MAX_GOOD  1800     // 1 Hz -->  1.800 Hz, 10 --> 18.000 Hz
-    #define NUM_HARMONICS_MAX_OKAY  1000     // 1 Hz -->  1.000 Hz, 10 --> 10.000 Hz
-    #define NUM_HARMONICS_MAX_FAIR   500     // 1 Hz -->    500 Hz, 10 -->  5.000 Hz, 100 --> 50.000
-    #define NUM_HARMONICS_MAX_FAST   250     // 1 Hz -->    250 Hz, 10 -->  2.500 Hz, 100 --> 25.000
-    #define NUM_HARMONICS_MAX_CENT   100     // 1 Hz -->    100 Hz, 10 -->  1.000 Hz, 100 --> 10.000
-    #define NUM_HARMONICS_MAX_PHEW    20     // 1 Hz -->     20 Hz, 10 -->    200 Hz, 100 -->  2.000
-    #define NUM_HARMONICS_MAX_NONE     1     // 1 Hz -->      1 Hz, 10 -->     10 Hz, 100 -->    100
+    #define NUM_HARMONICS_MAX_BEST 96000     // 1 Hz --> 96.000 Hz = full 192.0 sample rate spectrum
+    #define NUM_HARMONICS_MAX_HARD 44100     // 1 Hz --> 44.100 Hz = full  88.2 sample rate spectrum
+    #define NUM_HARMONICS_MAX_FULL 22050     // 1 Hz --> 22.050 Hz = full  44.1 sample rate spectrum
+    #define NUM_HARMONICS_MAX_GOOD  2500     // 1 Hz -->  2.500 Hz, 10 --> 25.000 Hz, 100 --> 250.000
+    #define NUM_HARMONICS_MAX_OKAY   500     // 1 Hz -->    500 Hz, 10 -->  5.000 Hz, 100 -->  50.000
+    #define NUM_HARMONICS_MAX_FAIR   250     // 1 Hz -->    250 Hz, 10 -->  2.500 Hz, 100 -->  25.000
+    #define NUM_HARMONICS_MAX_FAST   100     // 1 Hz -->    100 Hz, 10 -->  1.000 Hz, 100 -->  10.000
+    #define NUM_HARMONICS_MAX_CENT    25     // 1 Hz -->     25 Hz, 10 -->    250 Hz, 100 -->   2.500
+    #define NUM_HARMONICS_MAX_PHEW    10     // 1 Hz -->     10 Hz, 10 -->    100 Hz, 100 -->   1.000
+    #define NUM_HARMONICS_MAX_NONE     1     // 1 Hz -->      1 Hz, 10 -->     10 Hz, 100 -->     100
     
     SkeletonBandlimited ()
     {

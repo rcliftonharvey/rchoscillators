@@ -59,7 +59,7 @@ public:
         dunHarmonics = 0;
         
         // Iterate through as many harmonic overtones as should be generated
-        for (unsigned int harmonic=1; dunHarmonics<=numHarmonics; ++harmonic)
+        for (unsigned int harmonic=1; dunHarmonics<numHarmonics; ++harmonic)
         {
             // This is the number of the currently generated harmonic step,
             // can be used as amplitude modifier later.

@@ -45,34 +45,34 @@ RchoscillatorsAudioProcessor::RchoscillatorsAudioProcessor()
     addParameter(volumeInput         = new AudioParameterFloat("volumeInput",           "Input: Trim",          0.0f,  1.0f,  paramTrim));
     
     addParameter(sine                = new AudioParameterBool ("sine",                  "Sine: In",             true));
-    addParameter(volumeSine          = new AudioParameterFloat("volumeSine",            "Sine: Volume",         0.0f,  1.0f,  paramGain));
-    addParameter(frequencySine       = new AudioParameterFloat("frequencySine",         "Sine: Hz",             0.0f,  1.0f,  paramFreq));
+    addParameter(volumeSine          = new AudioParameterFloat("volumeSine",            "Sine: Amplitude",      0.0f,  1.0f,  paramGain));
+    addParameter(frequencySine       = new AudioParameterFloat("frequencySine",         "Sine: Frequency",      0.0f,  1.0f,  paramFreq));
     
     addParameter(triangle            = new AudioParameterBool ("triangle",              "Triangle: In",         false));
-    addParameter(volumeTriangle      = new AudioParameterFloat("volumeTriangle",        "Triangle: Volume",     0.0f,  1.0f,  paramGain));
-    addParameter(frequencyTriangle   = new AudioParameterFloat("frequencyTriangle",     "Triangle: Hz",         0.0f,  1.0f,  paramFreq));
+    addParameter(volumeTriangle      = new AudioParameterFloat("volumeTriangle",        "Triangle: Amplitude",  0.0f,  1.0f,  paramGain));
+    addParameter(frequencyTriangle   = new AudioParameterFloat("frequencyTriangle",     "Triangle: Frequency",  0.0f,  1.0f,  paramFreq));
     
     addParameter(saw                 = new AudioParameterBool ("saw",                   "Saw (rise): In",       false));
-    addParameter(volumeSaw           = new AudioParameterFloat("volumeSaw",             "Saw (rise): Volume",   0.0f,  1.0f,  paramGain));
-    addParameter(frequencySaw        = new AudioParameterFloat("frequencySaw",          "Saw (rise): Hz",       0.0f,  1.0f,  paramFreq));
+    addParameter(volumeSaw           = new AudioParameterFloat("volumeSaw",             "Saw (rise): Amplitude",0.0f,  1.0f,  paramGain));
+    addParameter(frequencySaw        = new AudioParameterFloat("frequencySaw",          "Saw (rise): Frequency",0.0f,  1.0f,  paramFreq));
     
     addParameter(sawReverse          = new AudioParameterBool ("sawReverse",            "Saw (fall): In",       false));
-    addParameter(volumeSawReverse    = new AudioParameterFloat("volumeSawReverse",      "Saw (fall): Volume",   0.0f,  1.0f,  paramGain));
-    addParameter(frequencySawReverse = new AudioParameterFloat("frequencySawReverse",   "Saw (fall): Hz",       0.0f,  1.0f,  paramFreq));
+    addParameter(volumeSawReverse    = new AudioParameterFloat("volumeSawReverse",      "Saw (fall): Amplitude",0.0f,  1.0f,  paramGain));
+    addParameter(frequencySawReverse = new AudioParameterFloat("frequencySawReverse",   "Saw (fall): Frequency",0.0f,  1.0f,  paramFreq));
     
     addParameter(square              = new AudioParameterBool ("square",                "Square: In",           false));
-    addParameter(volumeSquare        = new AudioParameterFloat("volumeSquare",          "Square: Volume",       0.0f,  1.0f,  paramGain));
-    addParameter(frequencySquare     = new AudioParameterFloat("frequencySquare",       "Square: Hz",           0.0f,  1.0f,  paramFreq));
+    addParameter(volumeSquare        = new AudioParameterFloat("volumeSquare",          "Square: Amplitude",    0.0f,  1.0f,  paramGain));
+    addParameter(frequencySquare     = new AudioParameterFloat("frequencySquare",       "Square: Frequency",    0.0f,  1.0f,  paramFreq));
     
-    addParameter(squarePulse         = new AudioParameterBool ("squarePulse",           "Square Pulse: In",     false));
-    addParameter(volumeSquarePulse   = new AudioParameterFloat("volumeSquarePulse",     "Square Pulse: Volume", 0.0f,  1.0f,  paramGain));
-    addParameter(frequencySquarePulse= new AudioParameterFloat("frequencySquarePulse",  "Square Pulse: Hz",     0.0f,  1.0f,  paramFreq));
-    addParameter(widthSquarePulse    = new AudioParameterFloat("widthSquarePulse",      "Square Pulse: Width",  0.0f,  1.0f,  0.5f));
+    addParameter(squarePulse         = new AudioParameterBool ("squarePulse",           "Square Pulse: In",         false));
+    addParameter(volumeSquarePulse   = new AudioParameterFloat("volumeSquarePulse",     "Square Pulse: Amplitude",  0.0f,  1.0f,  paramGain));
+    addParameter(frequencySquarePulse= new AudioParameterFloat("frequencySquarePulse",  "Square Pulse: Frequency",  0.0f,  1.0f,  paramFreq));
+    addParameter(widthSquarePulse    = new AudioParameterFloat("widthSquarePulse",      "Square Pulse: Width",      0.0f,  1.0f,  0.5f));
     
     addParameter(pulse               = new AudioParameterBool ("pulse",                 "Pulse: In",            false));
-    addParameter(volumePulse         = new AudioParameterFloat("volumePulse",           "Pulse: Volume",        0.0f,  1.0f,  paramGain));
-    addParameter(frequencyPulse      = new AudioParameterFloat("frequencyPulse",        "Pulse: Hz",            0.0f,  1.0f,  paramFreq));
-    addParameter(widthPulse          = new AudioParameterFloat("widthPulse",            "Pulse: Width",         0.0f,  1.0f,  0.5f));
+    addParameter(volumePulse         = new AudioParameterFloat("volumePulse",           "Pulse: Amplitude",     0.0f,  1.0f,  paramGain));
+    addParameter(frequencyPulse      = new AudioParameterFloat("frequencyPulse",        "Pulse: Frequency",     0.0f,  1.0f,  paramFreq));
+    addParameter(widthPulse          = new AudioParameterFloat("widthPulse",            "Pulse: PulseWidth",    0.0f,  1.0f,  0.5f));
     
     addParameter(volumeOutput        = new AudioParameterFloat("volumeOutput",          "Output: Trim",         0.0f,  1.0f,  paramTrim));
 }
