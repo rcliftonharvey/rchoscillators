@@ -19,7 +19,7 @@
 
 ## Introduction 
 
-This is a pure C++ library that implements all sorts of *naive* oscillator types, as well as some *band-limited* flavours, in fast and easy to use classes.
+This is a pure C++ library that implements all sorts of *naive* oscillator types, as well as their *band-limited* flavours, in fast and easy to use classes.
 
 This library is compatible with frameworks like [JUCE](https://juce.com/) or [WDL](https://www.cockos.com/wdl/), but it was written with no dependencies, which means you can use it by itself and in any application, without being bound to any such 3rd party frameworks at all.
 
@@ -75,6 +75,8 @@ Overall, including the sine wave at the base frequency, it's necessray to calcul
 Since triangle and square waves consist of only odd-order harmonics, it's sufficient to calculate only every second harmonic on top of the base frequency. So these wave shapes will probably be a bit lighter on CPU, as they only have to calculate and add half the amount of sine waves compared to a sawtooth.
 
 I built an accuracy setting into the band-limited oscillators, check the [skeleton_bl.h](https://github.com/rcliftonharvey/rchoscillators/tree/master/library/helpers/skeleton_bl.h) header file for the exact limit definitions. An accuracy of 7 will guarantee that all harmonics up to 22.050 Hz will be calculated for even a 1 Hz wave. You may want to go higher than that, since a project sample rate of 192 kHz could handle frequencies up to 96.000 Hz and stopping at 22.050 Hz could look (and sound) truncated... eventually, it all depends on how accurate you want it to be. But for most applications, you should probably be able to get away with an accuracy setting of 3-4.
+
+If you didn't know: there is no band-limited sine wave mode. Because a sine wave does not have any harmonic overtones except its own base frequency, it is basically band-limited by design. That's why it's so reliable and convenient to use as a building block for other, more complex wave shapes.
 
 -------------------------------------------------------------------------------------------------------
 
