@@ -43,6 +43,7 @@ Included *band-limited* oscillators:
 + triangle
 + saw (rising and falling)
 + square
++ pulse
 
 I will probably be adding more oscillators and generation methods to this library over time...
 
