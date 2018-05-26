@@ -88,24 +88,24 @@ Include the [library](https://github.com/rcliftonharvey/rchoscillators/tree/mast
 
 If you use JUCE, add all the files from the library folder into a group in your JUCE project. The easiest way to do this is via the "add existing files" option in the files pane of the Projucer app.
 
-Depending on your compiler and workspace settings, you will probably have to adjust the include path for this file. But once the include path is sorted out, this is the only include line you should need:
+Depending on your compiler and workspace settings, you will probably have to adjust the include path for this file. But once the include path is sorted out, this is the only line you should need:
 ```c++
 #include "rchosc.h"
 ```
 
-To avoid possible collisions with other libraries you may be using in your projects, all the classes in this library reside in the **RCH::** namespace by default. (Unless you changed it in the rchosc.h file.)
+To avoid possible collisions with other libraries you may be using in your projects, all the classes in this library reside in the **RCH::** namespace by default. You're of course welcome to change the namespace in the [rchosc.h](https://github.com/rcliftonharvey/rchoscillators/tree/master/library/rchosc.h) main include file.
 
 **IMPORTANT** *Since I remember struggling with this myself in the early years...<br>
 These oscillators are **stateful**. This means one oscillator instance stays alive all the time, and no matter how many sample blocks you need to fill, you always do it with the same oscillator instance. If you want to have a continuous oscillator wave without any distortion or phase jumps, do not instantiate these in your per-block processing methods, but instantiate them as lasting variables in your header files.* :)
 
-To get started, go ahead and instantiate a simple mono sine oscillator class. In JUCE, you would do this in the **PluginProcessor.h** file:
+To get started, go ahead and instantiate a simple mono sine oscillator class. In JUCE, you would do this in the **PluginProcessor.h** file, for WDL it would be in your main project .h file.
 ```c++
 RCH::Oscillators::Templates::Sine oscSine;
 ```
 
 This will create an oscillator that can produce a continuous sine wave for a single channel of audio, and you will have to poll it on a per-sample basis.
 
-Now that your oscillator is instantiated, you need to inform it about essential values, like the sample rate to operate at and the center frequency to generate the sine wave at, otherwise the oscillator can't process correctly. Set the oscillator up somewhere in your per-block processing call, in JUCE that would be in the file **PluginProcessor.cpp**, maybe at ***prepareToPlay*** or (more likely) in the ***processBlock*** method:
+Now that your oscillator is instantiated, you need to inform it about essential values, like the sample rate to operate at and the center frequency to generate the sine wave at, otherwise the oscillator can't process correctly. Set the oscillator up somewhere in your per-block processing call, in JUCE it would be the **processBlock** method in the **PluginProcessor.cpp** file, in WDL it would be the **ProcessDoubleReplacing** method in the main project .cpp file:
 ```c++
 oscSine.setSampleRate(sampleRateInHz);
 oscSine.setFrequency(frequencyInHz);
@@ -163,6 +163,8 @@ oscTriangle.add (buffer,numChannels,numSamples);  // if you want to add the tria
 ```
 
 The **fill** or **add** methods expect an array of channels, where each channel is an array of samples. In native C++ lingo, this means the buffer needs to be of type **float**** or **double****, the most common types of sample & channel arrays.
+
+If you're using WDL, your **ProcessDoubleReplacing** will provide you a variable named **input** that's already in the correct format.
 
 If you're using JUCE, your **processBlock** method will present you with a variable named **buffer** in a JUCE specific datatype, the **AudioBuffer**. Despite being an abstraction, it still offers direct access to its channels and samples in the format required for the **fill** and **add** methods of these oscillators. Since the oscillator writes directly into the passed buffer, just make sure you go for WritePointers, not ReadPointers:
 ```c++
