@@ -7,12 +7,13 @@
 
 1. [Introduction](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#introduction)
 2. [Included oscillators](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#included-oscillators)
-3. [How to use](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#how-to-use)
-4. [Simplified use](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#simplified-use)
-5. [Example project](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#example-project)
-6. [Notes](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#notes)
-7. [License](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#license)
-8. [Credits](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#credits)
+3. [A note on band-limiting](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#a-note-on-band-limiting)
+4. [How to use](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#how-to-use)
+5. [Simplified use](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#simplified-use)
+6. [Example project](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#example-project)
+7. [Notes](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#notes)
+8. [License](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#license)
+9. [Credits](https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#credits)
 
 -------------------------------------------------------------------------------------------------------
 
@@ -49,6 +50,31 @@ Included *band-limited* oscillators:
 I will probably be adding more oscillators and generation methods to this library over time...
 
 The included oscillators come both as single-channel per-sample "templates", as well as multi-channel capable processors that can fill entire sample buffers with a sound wave in just one short line of code.
+
+-------------------------------------------------------------------------------------------------------
+
+## A note on band-limiting
+
+It's probably worth mentioning that since the *band-limited* oscillators are created by progressively generating and adding multiple sine waves, they **can** come at a price.
+
+While they are guaranteed to be aliasing-free, their accuracy depends on how many harmonics sine waves are calculated. For some wave shapes you can get away with generating just a few harmonic overtones to get a fairly smooth oscillation, and for others it's necessary to calculate quite a lot of harmonics until they start looking close to what they should look like.
+
+A *harmonic overtone* is essentially a multiple of the base frequency. The lower the frequency of the wave, the more harmonics have to be generated to fill the spectrum, and the higher the frequency of the wave, the less harmonics have to be generated. This means that a simple saw wave could hardly touch the CPU at really high frequencies, but possibly bring your machine to a near halt at 1 Hz.
+
+**Example**<br>
+A saw wave should oscillate at 1.000 Hz. With a sample rate of 44.100 Hz, the highest frequency that can be calculated is 22.050 Hz. Since saw waves contain even and odd harmonics, to get an accurate band-limited saw wave, an additional sine wave at every multiple of the base frequency needs to be generated and added. One at 2.000 Hz (2x 1.000 Hz), one at 3.000 Hz (3x 1.000 Hz), one at 4.000 Hz (4x 1.000 Hz), and so on until it reaches the 1/2 sample rate nyquist limit at, in this case, 22.050 Hz.
+
+Overall, including the sine wave at the base frequency, it's necessary to calculate and add 22 sine waves to get a clean band-limited saw wave at 1.000 Hz.
+
+Now, if the saw wave were to oscillate at 10 Hz, at the same sample rate of 44.100 Hz and the same nyquist cutoff at 22.050 Hz, things get tricky. The same rule applies, to generate a clean saw wave, every multiple of the base frequency up to the 1/2 sample rate nyquist limit has to be calculated and added in. This means we need an additional sine wave at 20 Hz (2x 10 Hz, one at 30 Hz (3x 10 Hz), one at 40 Hz (4x 10 Hz) and so on, again until we hit the 22.050 Hz limit.
+
+Overall, including the sine wave at the base frequency, it's necessray to calculate and add 2.200 sine waves to get a clean band-limited saw wave at 10 Hz.
+
+22 in contrast to 2.200... quite a jump.
+
+Since triangle and square waves consist of only odd-order harmonics, it's only necessary to calculate every second harmonic on top of the base frequency. So these wave shapes will probably be a bit lighter on CPU, as they only have to calculate and add half the amount of sine waves than a sawtooth.
+
+I built an accuracy setting into the band-limited oscillators, check the [skeleton_bl.h](https://github.com/rcliftonharvey/rchoscillators/tree/master/library/helpers/skeleton_bl.h) header file for the exact limit definitions. At 44.1 kHz sample rate, an accuracy of 7 will guarantee that all harmonics up to 22.050 Hz will be calculated for even a 1 Hz wave. For most applications, you'd probably get away with an accuracy of 3-4.
 
 -------------------------------------------------------------------------------------------------------
 
