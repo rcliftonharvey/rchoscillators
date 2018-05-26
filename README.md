@@ -115,7 +115,7 @@ In their current state, these wrapper classes will generate a **single mono osci
 
 Theoretically, there is no limitation to the number of channels that could be processed, a buffer block could have a single channel, or over 200 channels, the oscillators don't care. Your CPU might, at some point. :)
 
-To instantiate an example triangle wave oscillator that offers this simple processing method, just instantiate it in your header file like this:
+To create an example triangle wave oscillator that offers this simple processing method, just instantiate it in your header file like this:
 ```c++
 RCH::Oscillators::Triangle oscTriangle;
 ```
