@@ -68,9 +68,9 @@ Overall, including the sine wave at the base frequency, it's necessary to calcul
 
 Now, if the saw wave were to oscillate at 10 Hz, at the same sample rate of 44.100 Hz and the same nyquist cutoff at 22.050 Hz, things would get tricky. The same rule applies: to generate a clean saw wave, every multiple of the base frequency up to the 1/2 sample rate nyquist limit has to be calculated and added in. This means we need an additional sine wave at 20 Hz (2x 10 Hz), one at 30 Hz (3x 10 Hz), one at 40 Hz (4x 10 Hz) and so on, again until we hit the 22.050 Hz limit.
 
-Overall, including the sine wave at the base frequency, it's necessray to calculate and add **2.204** sine waves to get a clean band-limited saw wave at 10 Hz.
+Overall, including the sine wave at the base frequency, it's necessary to calculate and add **2.205** sine waves to get a clean band-limited saw wave at 10 Hz.
 
-22 in contrast to 2.204... quite a jump.
+2.205 in contrast to 22 before... quite a jump.
 
 Since triangle and square waves consist of only odd-order harmonics, it's sufficient to calculate only every second harmonic on top of the base frequency. So these wave shapes will probably be a bit lighter on CPU, as they only have to calculate and add half the amount of sine waves compared to a sawtooth.
 
