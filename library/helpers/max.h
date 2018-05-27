@@ -1,5 +1,6 @@
-#ifndef RCHOSC_HELPERS_MAX_H_INCLUDED
-#define RCHOSC_HELPERS_MAX_H_INCLUDED
+#pragma once
+#ifndef RCH_HELPERS_MAX_H_INCLUDED
+#define RCH_HELPERS_MAX_H_INCLUDED
 // ---- MODULE CODE STARTS BELOW ---- //
 
     
@@ -12,4 +13,4 @@ TYPE Max (const TYPE& A, const TYPE& B)
 
 
 // ---- MODULE CODE ENDS ABOVE ---- //
-#endif // #ifndef RCHOSC_HELPERS_MAX_H_INCLUDED
+#endif // #ifndef RCH_HELPERS_MAX_H_INCLUDED

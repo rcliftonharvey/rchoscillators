@@ -1,8 +1,4 @@
-#ifndef RCHOSC_H_INCLUDED
-#define RCHOSC_H_INCLUDED
-// ---- MODULE CODE STARTS BELOW ---- //
-
-
+//
 //  RCH::Oscillators
 //
 //  A library of fast DSP oscillators in pure C++
@@ -15,7 +11,11 @@
 //
 //  A full version of the license file can be found here:
 //  https://github.com/rcliftonharvey/rchoscillators/blob/master/LICENSE
-//  https://github.com/rcliftonharvey/rchoscillators/blob/master/README.md#license
+//
+#pragma once
+#ifndef RCHOSC_H_INCLUDED
+#define RCHOSC_H_INCLUDED
+// ---- MODULE CODE STARTS BELOW ---- //
 
 
 // Include C++ dependencies
@@ -24,7 +24,7 @@
 #include <vector>
 
 
-/** RCH::Oscillators are in here */
+/** RCH classes are in here */
 namespace RCH
 {
     /** Assorted supporting functionality */

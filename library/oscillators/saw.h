@@ -1,3 +1,4 @@
+#pragma once
 #ifndef RCHOSC_OSCILLATORS_SAW_H_INCLUDED
 #define RCHOSC_OSCILLATORS_SAW_H_INCLUDED
 // ---- MODULE CODE STARTS BELOW ---- //
@@ -29,14 +30,8 @@ public:
 
 
 // Just cleaning up
-#ifdef OSCILLATOR_WRAPPER
 #undef OSCILLATOR_WRAPPER
-#endif
-
-// Just cleaning up
-#ifdef OSCILLATOR_TYPE
 #undef OSCILLATOR_TYPE
-#endif
 
 
 // ---- MODULE CODE ENDS ABOVE ---- //

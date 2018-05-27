@@ -1,3 +1,4 @@
+#pragma once
 #ifndef RCHOSC_OSCILLATORS_TEMPLATES_SQUAREPULSE_H_INCLUDED
 #define RCHOSC_OSCILLATORS_TEMPLATES_SQUAREPULSE_H_INCLUDED
 // ---- MODULE CODE STARTS BELOW ---- //
@@ -71,10 +72,6 @@ public:
         phase += ((phase >= 1.0) * -1.0) + ((phase < 0.0) * 1.0);
         
         // Calculate pulse value for current phase step
-        // For simplicity, this will stay an IF conditional branch
-        //
-        // (Use just amplitude instead of (+/- 1.0 * amplitude) to save a
-        //  multiplication step when utilizing slow conditional branching.)
         //
         // If phase between [0.0,width] then output state is positive
         // if (phase < width)
@@ -86,11 +83,12 @@ public:
         // {
         //     state = -amplitude;
         // }
-        // If phase outside of value range that should generate a pulse
+        // If phase outside of value range that should generate signal
         // else
         // {
         //     state = 0.0;
         // }
+        //
         // IF-branches are slower than simple maths in time critical code, this does the same but faster
         state = ((phase < width) * amplitude) + ((phase >= 0.5) * (phase < 0.5 + width) * -amplitude);
         

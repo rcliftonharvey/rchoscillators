@@ -1,3 +1,4 @@
+#pragma once
 #ifndef RCHOSC_OSCILLATORS_TEMPLATES_TRIANGLE_H_INCLUDED
 #define RCHOSC_OSCILLATORS_TEMPLATES_TRIANGLE_H_INCLUDED
 // ---- MODULE CODE STARTS BELOW ---- //
@@ -60,7 +61,7 @@ public:
         
         // Calculate triangle value for current phase step
         //
-        // if (phase <= 0.5)
+        // if (phase < 0.5)
         // {
         //     state = phase * 4.0 - 1.0;
         // }

@@ -1,5 +1,6 @@
-#ifndef RCHOSC_HELPERS_SIGN_H_INCLUDED
-#define RCHOSC_HELPERS_SIGN_H_INCLUDED
+#pragma once
+#ifndef RCH_HELPERS_SIGN_H_INCLUDED
+#define RCH_HELPERS_SIGN_H_INCLUDED
 // ---- MODULE CODE STARTS BELOW ---- //
 
 
@@ -21,4 +22,4 @@ const TYPE Sign (const TYPE& Value)
 
 
 // ---- MODULE CODE ENDS ABOVE ---- //
-#endif // #ifndef RCHOSC_HELPERS_SIGN_H_INCLUDED
+#endif // #ifndef RCH_HELPERS_SIGN_H_INCLUDED

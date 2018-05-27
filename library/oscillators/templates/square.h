@@ -1,3 +1,4 @@
+#pragma once
 #ifndef RCHOSC_OSCILLATORS_TEMPLATES_SQUARE_H_INCLUDED
 #define RCHOSC_OSCILLATORS_TEMPLATES_SQUARE_H_INCLUDED
 // ---- MODULE CODE STARTS BELOW ---- //
@@ -69,7 +70,7 @@ public:
         // It would also be possible to do IF-branching here, but branching in time-critical
         // per-sample methods is to be discouraged, so I wanted to do it differently here.
         //
-        // This is possible but clunky, since uses Maths instead of a simple bool 0/1 multiplier.
+        // This is possible but clunky, since it uses template functions over simple bool 0/1 multipliers.
         // const unsigned int index = static_cast<unsigned int>(std::ceil(phase - 0.5));
         //
         // This is a lot simpler/faster to compute than conditional branching or ceilings.

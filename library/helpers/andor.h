@@ -1,14 +1,19 @@
-#ifndef RCHOSC_HELPERS_ANDOR_H_INCLUDED
-#define RCHOSC_HELPERS_ANDOR_H_INCLUDED
+#pragma once
+#ifndef RCH_HELPERS_ANDOR_H_INCLUDED
+#define RCH_HELPERS_ANDOR_H_INCLUDED
 // ---- MODULE CODE STARTS BELOW ---- //
 
 
 // Hack to make Visual Studio accept 'and' and 'or' operators in code.
 #if _MSC_VER > 1000
-    #define and &&
-    #define or ||
+    #ifndef and
+        #define and &&
+    #endif
+    #ifndef or
+        #define or ||
+    #endif
 #endif
 
 
 // ---- MODULE CODE ENDS ABOVE ---- //
-#endif // #ifndef RCHOSC_HELPERS_ANDOR_H_INCLUDED
+#endif // #ifndef RCH_HELPERS_ANDOR_H_INCLUDED
