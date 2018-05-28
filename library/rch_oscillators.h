@@ -13,8 +13,8 @@
 //  https://github.com/rcliftonharvey/rchoscillators/blob/master/LICENSE
 //
 #pragma once
-#ifndef RCHOSC_H_INCLUDED
-#define RCHOSC_H_INCLUDED
+#ifndef RCH_OSCILLATORS_H_INCLUDED
+#define RCH_OSCILLATORS_H_INCLUDED
 // ---- MODULE CODE STARTS BELOW ---- //
 
 
@@ -97,4 +97,4 @@ namespace RCH
 
 
 // ---- MODULE CODE ENDS ABOVE ---- //
-#endif // #ifndef RCHOSC_H_INCLUDED
+#endif // #ifndef RCH_OSCILLATORS_H_INCLUDED

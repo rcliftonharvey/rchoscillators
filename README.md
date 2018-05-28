@@ -90,10 +90,10 @@ If you use JUCE, add all the files from the library folder into a group in your 
 
 Depending on your compiler and workspace settings, you will probably have to adjust the include path for this file. But once the include path is sorted out, this is the only line you should need:
 ```c++
-#include "rchosc.h"
+#include "rch_oscillators.h"
 ```
 
-To avoid possible collisions with other libraries you may be using in your projects, all the classes in this library reside in the **RCH::** namespace by default. You're of course welcome to change the namespace in the [rchosc.h](https://github.com/rcliftonharvey/rchoscillators/tree/master/library/rchosc.h) main include.
+To avoid possible collisions with other libraries you may be using in your projects, all the classes in this library reside in the **RCH::** namespace by default. You're of course welcome to change the namespace in the [rch_oscillators.h](https://github.com/rcliftonharvey/rchoscillators/tree/master/library/rch_oscillators.h) main include.
 
 > **IMPORTANT** *Since I remember struggling with this myself in the early years...<br>
 > These oscillators are **stateful**. This means one oscillator instance stays alive all the time, and no matter how many sample blocks you need to fill, you always do it with the same oscillator instance. If you want to have a continuous oscillator wave without any distortion or phase jumps, do not instantiate these in your per-block processing methods, but instantiate them as lasting variables in your header files.* :)
