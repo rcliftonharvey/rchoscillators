@@ -1,5 +1,5 @@
 # RCH::Oscillators
-#### A library of fast DSP oscillators in pure C++
+#### A library of DSP oscillators in pure C++
 
 -------------------------------------------------------------------------------------------------------
 
